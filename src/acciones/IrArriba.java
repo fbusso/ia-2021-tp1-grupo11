@@ -12,6 +12,10 @@ import frsf.cidisi.faia.state.EnvironmentState;
 
 public class IrArriba extends SearchAction {
 
+    /**
+     * Actualiza un nodo del árbol de búsqueda mientras se ejecuta el algoritmo.
+     * No actualiza el estado del mundo real.
+     */
     @Override
     public SearchBasedAgentState execute(SearchBasedAgentState s) {
         EstadoCaperucita estado = (EstadoCaperucita) s;
@@ -29,6 +33,9 @@ public class IrArriba extends SearchAction {
         return null;
     }
 
+    /**
+     * Actualiza el estado del agente y del mundo real.
+     */
     @Override
     public EnvironmentState execute(AgentState agentState, EnvironmentState environmentState) {
         EstadoAmbiente estadoAmbiente = (EstadoAmbiente) environmentState;
@@ -62,8 +69,11 @@ public class IrArriba extends SearchAction {
         return null;
     }
 
+    /**
+     * Este método no es importante para un agente basado en búsqueda.
+     */
     @Override
     public String toString() {
-        return null;
+        return "IR ARRIBA";
     }
 }
