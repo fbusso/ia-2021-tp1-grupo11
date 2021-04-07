@@ -49,12 +49,12 @@ public class IrArriba extends SearchAction {
             Integer cantidadDulcesActualizada = estadoAgente.getCantidadDulces() + auxiliar.getCantidadDulcesEnCamino();
             char[][] matrizActualizada = Escenario.removerDulces(matriz, auxiliar.getPosicionesDulces());
 
-            // Actualizacion del estado del agente
+            // Actualización del estado del agente
             estadoAgente.setPosicion(auxiliar.getPosicionFinal());
             estadoAgente.setCantidadDulces(cantidadDulcesActualizada);
             estadoAgente.getEscenario().setMatriz(matrizActualizada);
 
-            // Actualizacion del estado del ambiente
+            // Actualización del estado del ambiente
             estadoAmbiente.setPosicionCaperucita(auxiliar.getPosicionFinal());
             estadoAmbiente.setCantidadDulcesRecolectados(cantidadDulcesActualizada);
             estadoAmbiente.getEscenario().setMatriz(matrizActualizada);
