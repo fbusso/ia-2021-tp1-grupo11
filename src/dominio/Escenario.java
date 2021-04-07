@@ -1,13 +1,15 @@
 package dominio;
 
+import auxiliar.AuxiliarCsv;
+
 import java.util.List;
 
 public class Escenario {
     private char[][] matriz;
     private Integer cantidadDulces;
 
-    public Escenario(Integer cantidadFilas, Integer cantidadColumnas) {
-        this.matriz = new char[cantidadFilas][cantidadColumnas];
+    public Escenario() {
+        this.matriz = AuxiliarCsv.obtenerMatriz();
         this.cantidadDulces = contarDulces();
     }
 
@@ -44,5 +46,15 @@ public class Escenario {
             matriz[posicion.i][posicion.j] = ' ';
         }
         return matriz;
+    }
+
+    public Posicion obtenerPosicionInicial() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 14; j++) {
+                if (matriz[i][j] == 'C')
+                    return new Posicion(i, j);
+            }
+        }
+        return null;
     }
 }

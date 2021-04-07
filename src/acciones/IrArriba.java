@@ -24,9 +24,9 @@ public class IrArriba extends SearchAction {
         AuxiliarIrArriba auxiliar = new AuxiliarIrArriba(matriz, posicionActual);
 
         if (!auxiliar.getLoboEnCamino()) {
-            Integer nuevaCantidadDulces = estado.getCantidadDulces() + auxiliar.getCantidadDulcesEnCamino();
+            Integer nuevaCantidadDulces = estado.getCantidadActualDulces() + auxiliar.getCantidadDulcesEnCamino();
             estado.setPosicion(auxiliar.getPosicionFinal());
-            estado.setCantidadDulces(nuevaCantidadDulces);
+            estado.setCantidadActualDulces(nuevaCantidadDulces);
             estado.getEscenario().setMatriz(Escenario.removerDulces(matriz, auxiliar.getPosicionesDulces()));
         }
 
@@ -46,12 +46,12 @@ public class IrArriba extends SearchAction {
         AuxiliarIrArriba auxiliar = new AuxiliarIrArriba(matriz, posicionActual);
 
         if (!auxiliar.getLoboEnCamino()) {
-            Integer cantidadDulcesActualizada = estadoAgente.getCantidadDulces() + auxiliar.getCantidadDulcesEnCamino();
+            Integer cantidadDulcesActualizada = estadoAgente.getCantidadActualDulces() + auxiliar.getCantidadDulcesEnCamino();
             char[][] matrizActualizada = Escenario.removerDulces(matriz, auxiliar.getPosicionesDulces());
 
             // Actualización del estado del agente
             estadoAgente.setPosicion(auxiliar.getPosicionFinal());
-            estadoAgente.setCantidadDulces(cantidadDulcesActualizada);
+            estadoAgente.setCantidadActualDulces(cantidadDulcesActualizada);
             estadoAgente.getEscenario().setMatriz(matrizActualizada);
 
             // Actualización del estado del ambiente

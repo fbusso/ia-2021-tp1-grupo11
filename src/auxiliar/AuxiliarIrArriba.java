@@ -6,14 +6,13 @@ import java.util.ArrayList;
 
 public class AuxiliarIrArriba {
 
-
     private Posicion posicionFinal;
     private Boolean loboEnCamino;
     private ArrayList<Posicion> posicionesDulces;
     private Integer cantidadDulcesEnCamino;
 
     public AuxiliarIrArriba(char[][] matriz, Posicion posicionActual) {
-        posicionesDulces = new ArrayList<>();
+        posicionesDulces = new ArrayList<Posicion>();
         cantidadDulcesEnCamino = 0;
         loboEnCamino = false;
         calcularAuxiliares(matriz, posicionActual);

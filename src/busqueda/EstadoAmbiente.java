@@ -8,6 +8,7 @@ public class EstadoAmbiente extends EnvironmentState {
 
     private Escenario escenario;
     private Posicion posicionCaperucita;
+    private Integer cantidadTotalDulces;
     private Integer cantidadDulcesRecolectados;
 
     public EstadoAmbiente() {
@@ -15,6 +16,14 @@ public class EstadoAmbiente extends EnvironmentState {
 
     public Escenario getEscenario() {
         return escenario;
+    }
+
+    public void setEscenario(Escenario escenario) {
+        this.escenario = escenario;
+    }
+
+    public Posicion getPosicionCaperucita() {
+        return posicionCaperucita;
     }
 
     public void setPosicionCaperucita(Posicion posicionCaperucita) {
@@ -29,10 +38,19 @@ public class EstadoAmbiente extends EnvironmentState {
         this.cantidadDulcesRecolectados = cantidadDulcesRecolectados;
     }
 
+    public Integer getCantidadTotalDulces() {
+        return cantidadTotalDulces;
+    }
+
+    public void setCantidadTotalDulces(Integer cantidadTotalDulces) {
+        this.cantidadTotalDulces = cantidadTotalDulces;
+    }
+
     @Override
     public void initState() {
-        this.escenario = new Escenario(9, 14);
-        this.posicionCaperucita = new Posicion(0, 0);
+        this.escenario = new Escenario();
+        this.posicionCaperucita = escenario.obtenerPosicionInicial();
+        this.cantidadTotalDulces = escenario.getCantidadDulces();
         this.cantidadDulcesRecolectados = 0;
     }
 

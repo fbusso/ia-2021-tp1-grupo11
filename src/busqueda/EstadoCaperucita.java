@@ -9,8 +9,13 @@ public class EstadoCaperucita extends SearchBasedAgentState {
 
     private Posicion posicion;
     private Integer vidas;
-    private Integer cantidadDulces;
+    private Integer cantidadActualDulces;
+    private Integer cantidadTotalDulces;
     private Escenario escenario;
+
+    public EstadoCaperucita() {
+        this.initState();
+    }
 
     public Posicion getPosicion() {
         return posicion;
@@ -28,12 +33,20 @@ public class EstadoCaperucita extends SearchBasedAgentState {
         this.vidas = vidas;
     }
 
-    public Integer getCantidadDulces() {
-        return cantidadDulces;
+    public Integer getCantidadActualDulces() {
+        return cantidadActualDulces;
     }
 
-    public void setCantidadDulces(Integer cantidadDulces) {
-        this.cantidadDulces = cantidadDulces;
+    public void setCantidadActualDulces(Integer cantidadActualDulces) {
+        this.cantidadActualDulces = cantidadActualDulces;
+    }
+
+    public Integer getCantidadTotalDulces() {
+        return cantidadTotalDulces;
+    }
+
+    public void setCantidadTotalDulces(Integer cantidadTotalDulces) {
+        this.cantidadTotalDulces = cantidadTotalDulces;
     }
 
     public Escenario getEscenario() {
@@ -50,7 +63,9 @@ public class EstadoCaperucita extends SearchBasedAgentState {
         EstadoCaperucita nuevoEstado = new EstadoCaperucita();
 
         nuevoEstado.setVidas(this.vidas);
-        nuevoEstado.setCantidadDulces(this.cantidadDulces);
+        nuevoEstado.setEscenario(this.escenario);
+        nuevoEstado.setCantidadActualDulces(this.cantidadActualDulces);
+        nuevoEstado.setCantidadTotalDulces(this.cantidadTotalDulces);
         nuevoEstado.setPosicion(this.posicion);
 
         return nuevoEstado;
@@ -58,6 +73,10 @@ public class EstadoCaperucita extends SearchBasedAgentState {
 
     @Override
     public void updateState(Perception p) {
+
+        Percepcion percepcion = (Percepcion) p;
+
+
         // TODO Auto-generated method stub
 
     }
@@ -70,15 +89,17 @@ public class EstadoCaperucita extends SearchBasedAgentState {
 
     @Override
     public void initState() {
-        // TODO Auto-generated method stub
-
+        vidas = 3;
+        cantidadActualDulces = 0;
+        escenario = new Escenario();
+        posicion = escenario.obtenerPosicionInicial();
+        cantidadTotalDulces = escenario.getCantidadDulces();
     }
 
     @Override
     public boolean equals(Object obj) {
         return ((EstadoCaperucita) obj).getVidas().equals(this.getVidas())
                 && ((EstadoCaperucita) obj).getPosicion().equals(this.getPosicion())
-                && ((EstadoCaperucita) obj).getCantidadDulces().equals(this.getCantidadDulces());
+                && ((EstadoCaperucita) obj).getCantidadActualDulces().equals(this.getCantidadActualDulces());
     }
-
 }

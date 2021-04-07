@@ -3,7 +3,7 @@ package busqueda;
 import frsf.cidisi.faia.agent.search.GoalTest;
 import frsf.cidisi.faia.state.AgentState;
 
-public class ObjetivoCaperucita extends GoalTest {
+public class ObjetivoAgente extends GoalTest {
 
     @Override
     public boolean isGoalState(AgentState agentState) {
@@ -11,7 +11,7 @@ public class ObjetivoCaperucita extends GoalTest {
 
         return estado.getVidas() > 0
                 && estado.getEscenario().esCampoDeFlores(estado.getPosicion())
-                && estado.getCantidadDulces() == estado.getEscenario().getCantidadDulces();
+                && estado.getCantidadActualDulces().equals(estado.getCantidadTotalDulces());
     }
 
 }
