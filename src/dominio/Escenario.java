@@ -20,6 +20,7 @@ public class Escenario {
         return matriz;
     }
 
+    // TODO: Unir 2 for en uno
     private Integer contarDulces() {
         Integer cantidadDulces = 0;
         for (char[] fila : matriz) {

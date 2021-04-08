@@ -98,7 +98,7 @@ public class EstadoCaperucita extends SearchBasedAgentState {
     @Override
     public String toString() {
         return "\n" +
-                "- Posición actual en el mapa: Fila: " + posicion.i + ", Columna:" + posicion.j + "\n" +
+                "- Posición actual en el mapa: Fila: " + posicion.i + ", Columna: " + posicion.j + "\n" +
                 "- Vidas restantes: " + vidas + "\n" +
                 "- Dulces recolectados: " + cantidadActualDulces + "\n";
     }
