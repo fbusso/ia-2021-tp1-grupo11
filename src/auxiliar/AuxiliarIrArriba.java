@@ -34,17 +34,28 @@ public class AuxiliarIrArriba {
         return cantidadDulcesEnCamino;
     }
 
+    /**
+     * Calcula la siguiente posición de caperucita al avanzar en línea recta hacia arriba.
+     * Calcula la cantidad de dulces que hay en el camino.
+     * Verifica si el lobo está en el camino a recorrer.
+     * <p>
+     * La lectura de la matriz es de izquierda a derecha y de arriba hacia abajo, por lo que
+     * para moverse "hacia arriba" hay que restar en el valor de la fila.
+     *
+     * @param matriz
+     * @param posicionActual
+     */
     private void calcularAuxiliares(char[][] matriz, Posicion posicionActual) {
-        int indice = posicionActual.i + 1;
+        int indice = posicionActual.i - 1;
         while (matriz[indice][posicionActual.j] != 'A') {
             if (matriz[indice][posicionActual.j] == 'D') {
                 posicionesDulces.add(new Posicion(indice, posicionActual.j));
             } else if (matriz[indice][posicionActual.j] == 'L') {
                 loboEnCamino = true;
             }
-            indice++;
+            indice--;
         }
-        posicionFinal = new Posicion(indice - 1, posicionFinal.j);
+        posicionFinal = new Posicion(indice + 1, posicionActual.j);
         cantidadDulcesEnCamino = posicionesDulces.size();
     }
 }

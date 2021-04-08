@@ -27,7 +27,10 @@ public class IrArriba extends SearchAction {
             Integer nuevaCantidadDulces = estado.getCantidadActualDulces() + auxiliar.getCantidadDulcesEnCamino();
             estado.setPosicion(auxiliar.getPosicionFinal());
             estado.setCantidadActualDulces(nuevaCantidadDulces);
-            estado.getEscenario().setMatriz(Escenario.removerDulces(matriz, auxiliar.getPosicionesDulces()));
+
+            // TODO: Revisar por que esto rompe todo
+            // estado.getEscenario().setMatriz(Escenario.removerDulces(matriz, auxiliar.getPosicionesDulces()));
+            return estado;
         }
 
         return null;
@@ -66,7 +69,7 @@ public class IrArriba extends SearchAction {
 
     @Override
     public Double getCost() {
-        return null;
+        return 1.00;
     }
 
     /**
@@ -74,6 +77,6 @@ public class IrArriba extends SearchAction {
      */
     @Override
     public String toString() {
-        return "IR ARRIBA";
+        return "irArriba";
     }
 }

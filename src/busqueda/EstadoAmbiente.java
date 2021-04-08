@@ -12,6 +12,7 @@ public class EstadoAmbiente extends EnvironmentState {
     private Integer cantidadDulcesRecolectados;
 
     public EstadoAmbiente() {
+        this.initState();
     }
 
     public Escenario getEscenario() {

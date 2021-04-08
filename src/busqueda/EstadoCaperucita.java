@@ -72,22 +72,6 @@ public class EstadoCaperucita extends SearchBasedAgentState {
     }
 
     @Override
-    public void updateState(Perception p) {
-
-        Percepcion percepcion = (Percepcion) p;
-
-
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public String toString() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
     public void initState() {
         vidas = 3;
         cantidadActualDulces = 0;
@@ -97,9 +81,25 @@ public class EstadoCaperucita extends SearchBasedAgentState {
     }
 
     @Override
+    public void updateState(Perception p) {
+        Percepcion percepcion = (Percepcion) p;
+        this.cantidadActualDulces = percepcion.getCantidadAcualDulces();
+        this.posicion = percepcion.getPosicionActual();
+        this.escenario.setMatriz(percepcion.getMatriz());
+    }
+
+    @Override
     public boolean equals(Object obj) {
         return ((EstadoCaperucita) obj).getVidas().equals(this.getVidas())
                 && ((EstadoCaperucita) obj).getPosicion().equals(this.getPosicion())
                 && ((EstadoCaperucita) obj).getCantidadActualDulces().equals(this.getCantidadActualDulces());
+    }
+
+    @Override
+    public String toString() {
+        return "\n" +
+                "- Posición actual en el mapa: Fila: " + posicion.i + ", Columna:" + posicion.j + "\n" +
+                "- Vidas restantes: " + vidas + "\n" +
+                "- Dulces recolectados: " + cantidadActualDulces + "\n";
     }
 }

@@ -24,6 +24,7 @@ public class Agente extends SearchBasedAgent {
         EstadoCaperucita estadoAgente = new EstadoCaperucita();
         this.setAgentState(estadoAgente);
 
+        // TODO: Agregar el resto
         // Operadores.
         Vector<SearchAction> operadores = new Vector<SearchAction>();
         operadores.addElement(new IrArriba());

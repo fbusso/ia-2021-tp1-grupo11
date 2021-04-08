@@ -7,11 +7,12 @@ import java.util.Arrays;
 
 
 public class AuxiliarCsv {
-    static final String PATH = "C:\\Users\\franc\\Documents\\test.txt";
+    static final String PATH_ESCENARIO_EJEMPLO = "resources\\escenario_ejemplo.txt";
+    static final String PATH_ESCENARIO_MOVER_ARRIBA_EXITO = "resources\\escenario_mover_arriba_exito.txt";
 
     public static char[][] obtenerMatriz() {
         try {
-            BufferedReader csvReader = new BufferedReader(new FileReader(PATH));
+            BufferedReader csvReader = new BufferedReader(new FileReader(PATH_ESCENARIO_MOVER_ARRIBA_EXITO));
             int i = 0, j = 0;
             char[][] matriz = new char[9][14];
 
