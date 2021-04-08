@@ -34,7 +34,7 @@ public class AuxiliarIrArriba {
      */
     private void calcularAuxiliares(char[][] matriz, Posicion posicionActual) {
         int indice = posicionActual.i - 1;
-        while (matriz[indice][posicionActual.j] != 'A') {
+        while (indice >= 0 && matriz[indice][posicionActual.j] != 'A') {
             if (matriz[indice][posicionActual.j] == 'D') {
                 posicionesDulces.add(new Posicion(indice, posicionActual.j));
             } else if (matriz[indice][posicionActual.j] == 'L') {
