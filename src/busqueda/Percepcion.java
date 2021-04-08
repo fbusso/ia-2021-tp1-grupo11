@@ -11,16 +11,6 @@ public class Percepcion extends Perception {
     private Integer cantidadAcualDulces;
     private Posicion posicionActual;
 
-    public Percepcion() {
-        matriz = null;
-        posicionActual = null;
-        posicionActual = null;
-    }
-
-    public Percepcion(Agent agente, Environment ambiente) {
-        super(agente, ambiente);
-    }
-
     @Override
     public void initPerception(Agent agent, Environment environment) {
         EstadoAmbiente estadoAmbiente = (EstadoAmbiente) environment.getEnvironmentState();
@@ -55,6 +45,6 @@ public class Percepcion extends Perception {
 
     @Override
     public String toString() {
-        return "Posicion actual de Caperucita: Fila " + posicionActual.i + ", Columna " + posicionActual.j;
+        return "Posición actual de Caperucita: Fila " + posicionActual.i + ", Columna " + posicionActual.j;
     }
 }

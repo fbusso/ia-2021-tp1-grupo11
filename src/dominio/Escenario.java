@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Escenario {
     private char[][] matriz;
-    private Integer cantidadDulces;
+    private final Integer cantidadDulces;
 
     public Escenario() {
         this.matriz = AuxiliarCsv.obtenerMatriz();
