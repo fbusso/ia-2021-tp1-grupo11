@@ -76,7 +76,7 @@ public class EstadoCaperucita extends SearchBasedAgentState {
         vidas = 3;
         cantidadActualDulces = 0;
         escenario = new Escenario();
-        posicion = escenario.obtenerPosicionInicial();
+        posicion = escenario.getPosicionIncial();
         cantidadTotalDulces = escenario.getCantidadDulces();
     }
 
