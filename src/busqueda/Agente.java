@@ -9,7 +9,7 @@ import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.Problem;
 import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgent;
-import frsf.cidisi.faia.solver.search.DepthFirstSearch;
+import frsf.cidisi.faia.solver.search.BreathFirstSearch;
 import frsf.cidisi.faia.solver.search.Search;
 
 import java.util.Vector;
@@ -31,9 +31,9 @@ public class Agente extends SearchBasedAgent {
         // Operadores.
         Vector<SearchAction> operadores = new Vector<SearchAction>();
         operadores.addElement(new IrArriba());
+        operadores.addElement(new IrDerecha());
         operadores.addElement(new IrAbajo());
         operadores.addElement(new IrIzquierda());
-        operadores.addElement(new IrDerecha());
 
         Problem problema = new Problem(objetivoAgente, estadoAgente, operadores);
         this.setProblem(problema);
@@ -42,8 +42,18 @@ public class Agente extends SearchBasedAgent {
     @Override
     public Action selectAction() {
         // Create the search strategy
-        DepthFirstSearch estrategia = new DepthFirstSearch();
+
+        /*
+           Se crea la estrategia de búsqueda:
+           Se usa una Búsqueda en Anchura (Breathe First Search).
+           Alternativamente se podría usar una búsqueda en Profundidad (Depth First Search).
+
+           Para utilizar la búsqueda en profundidad, se cambia la siguiente línea por:
+           DepthFirstSearch estrategia = new DepthFirstSearch();
+         */
+        BreathFirstSearch estrategia = new BreathFirstSearch();
         Search busqueda = new Search(estrategia);
+
 
         // Genera un archivo XML del árbol de búsqueda.
         busqueda.setVisibleTree(Search.EFAIA_TREE);

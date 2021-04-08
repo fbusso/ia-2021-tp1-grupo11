@@ -45,6 +45,6 @@ public class Percepcion extends Perception {
 
     @Override
     public String toString() {
-        return "Posición actual de Caperucita: Fila " + posicionActual.i + ", Columna " + posicionActual.j;
+        return "\n- Posición actual de Caperucita: Fila " + posicionActual.i + ", Columna " + posicionActual.j;
     }
 }
