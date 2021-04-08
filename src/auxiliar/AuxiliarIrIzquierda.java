@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 public class AuxiliarIrIzquierda {
 
+    private final ArrayList<Posicion> posicionesDulces;
     private Posicion posicionFinal;
     private Boolean loboEnCamino;
     private Integer cantidadDulcesEnCamino;
-    private final ArrayList<Posicion> posicionesDulces;
 
     public AuxiliarIrIzquierda(char[][] matriz, Posicion posicionActual) {
         // Inicializar valores auxiliares.

@@ -1,6 +1,8 @@
 package busqueda;
 
+import acciones.IrAbajo;
 import acciones.IrArriba;
+import acciones.IrDerecha;
 import acciones.IrIzquierda;
 import frsf.cidisi.faia.agent.Action;
 import frsf.cidisi.faia.agent.Perception;
@@ -29,7 +31,9 @@ public class Agente extends SearchBasedAgent {
         // Operadores.
         Vector<SearchAction> operadores = new Vector<SearchAction>();
         operadores.addElement(new IrArriba());
+        operadores.addElement(new IrAbajo());
         operadores.addElement(new IrIzquierda());
+        operadores.addElement(new IrDerecha());
 
         Problem problema = new Problem(objetivoAgente, estadoAgente, operadores);
         this.setProblem(problema);
