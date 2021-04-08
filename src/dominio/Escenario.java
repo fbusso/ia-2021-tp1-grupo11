@@ -13,6 +13,13 @@ public class Escenario {
         this.cantidadDulces = contarDulces();
     }
 
+    public static char[][] removerDulces(char[][] matriz, List<Posicion> posiciones) {
+        for (Posicion posicion : posiciones) {
+            matriz[posicion.i][posicion.j] = ' ';
+        }
+        return matriz;
+    }
+
     private Integer contarDulces() {
         Integer cantidadDulces = 0;
         for (char[] fila : matriz) {
@@ -25,12 +32,12 @@ public class Escenario {
         return cantidadDulces;
     }
 
-    public void setMatriz(char[][] matriz) {
-        this.matriz = matriz;
-    }
-
     public char[][] getMatriz() {
         return matriz;
+    }
+
+    public void setMatriz(char[][] matriz) {
+        this.matriz = matriz;
     }
 
     public Integer getCantidadDulces() {
@@ -39,13 +46,6 @@ public class Escenario {
 
     public Boolean esCampoDeFlores(Posicion posicion) {
         return matriz[posicion.i][posicion.j] == 'F';
-    }
-
-    public static char[][] removerDulces(char[][] matriz, List<Posicion> posiciones) {
-        for (Posicion posicion : posiciones) {
-            matriz[posicion.i][posicion.j] = ' ';
-        }
-        return matriz;
     }
 
     public Posicion obtenerPosicionInicial() {
