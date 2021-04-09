@@ -41,8 +41,6 @@ public class Agente extends SearchBasedAgent {
 
     @Override
     public Action selectAction() {
-        // Create the search strategy
-
         /*
            Se crea la estrategia de búsqueda:
            Se usa una Búsqueda en Anchura (Breathe First Search).
