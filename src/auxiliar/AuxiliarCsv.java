@@ -19,7 +19,7 @@ public class AuxiliarCsv {
 
     public static char[][] obtenerMatriz() {
         try {
-            BufferedReader csvReader = new BufferedReader(new FileReader(ESCENARIO_EJEMPLO));
+            BufferedReader csvReader = new BufferedReader(new FileReader(ESCENARIO_PERSONALIZADO));
             int i = 0, j = 0;
             char[][] matriz = new char[9][14];
 

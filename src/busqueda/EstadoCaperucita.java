@@ -90,9 +90,13 @@ public class EstadoCaperucita extends SearchBasedAgentState {
 
     @Override
     public boolean equals(Object obj) {
-        return ((EstadoCaperucita) obj).getVidas().equals(this.getVidas())
-                && ((EstadoCaperucita) obj).getPosicion().equals(this.getPosicion())
-                && ((EstadoCaperucita) obj).getCantidadActualDulces().equals(this.getCantidadActualDulces());
+        if (!(obj instanceof EstadoCaperucita)) {
+            return false;
+        } else {
+            return ((EstadoCaperucita) obj).getVidas().equals(this.getVidas()) &&
+                    ((EstadoCaperucita) obj).getPosicion().equals(this.getPosicion()) &&
+                    ((EstadoCaperucita) obj).getCantidadActualDulces().equals(this.getCantidadActualDulces());
+        }
     }
 
     @Override
