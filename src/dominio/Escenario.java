@@ -24,8 +24,8 @@ public class Escenario {
 
     private void calculosAuxiliares() {
         cantidadDulces = 0;
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 14; j++) {
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[0].length; j++) {
                 if (matriz[i][j] == 'C')
                     posicionIncial = new Posicion(i, j);
                 if (matriz[i][j] == 'D')
