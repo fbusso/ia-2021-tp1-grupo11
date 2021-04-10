@@ -1,6 +1,6 @@
 package dominio;
 
-import auxiliar.AuxiliarCsv;
+import auxiliar.AuxiliarEscenario;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ public class Escenario {
     private Integer cantidadDulces;
     private Posicion posicionIncial;
 
-    public Escenario() {
-        matriz = AuxiliarCsv.obtenerMatriz();
+    public Escenario(char[][] matriz) {
+        this.matriz = matriz;
         calculosAuxiliares();
     }
 
