@@ -27,7 +27,7 @@ public class AuxiliarIrIzquierda {
      * Verifica si el lobo está en el camino a recorrer.
      *
      * @param matriz:         representación matricial del escenario
-     * @param posicionActual: poisición actual de Caperucita
+     * @param posicionActual: posición actual de Caperucita
      */
     private void calcularAuxiliares(char[][] matriz, Posicion posicionActual) {
         int indice = posicionActual.j - 1;

@@ -30,7 +30,7 @@ public class AuxiliarIrArriba {
      * para moverse "hacia arriba" hay que restar en el valor de la fila.
      *
      * @param matriz:         representación matricial del escenario
-     * @param posicionActual: poisición actual de Caperucita
+     * @param posicionActual: posición actual de Caperucita
      */
     private void calcularAuxiliares(char[][] matriz, Posicion posicionActual) {
         int indice = posicionActual.i - 1;
