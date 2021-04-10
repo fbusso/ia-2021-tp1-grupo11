@@ -10,6 +10,7 @@ public class EstadoAmbiente extends EnvironmentState {
     private Integer cantidadTotalDulces;
     private Escenario escenario;
     private Posicion posicionCaperucita;
+    private Posicion posicionLobo;
 
     public EstadoAmbiente(char[][] escenario) {
         this.escenario = new Escenario(escenario);
@@ -50,9 +51,10 @@ public class EstadoAmbiente extends EnvironmentState {
 
     @Override
     public void initState() {
-        this.posicionCaperucita = escenario.getPosicionIncial();
-        this.cantidadTotalDulces = escenario.getCantidadDulces();
+        this.posicionCaperucita = escenario.getPosicionInicialCaperucita();
+        this.posicionLobo = escenario.getPosicionInicialLobo();
         this.cantidadDulcesRecolectados = 0;
+        this.cantidadTotalDulces = escenario.getCantidadDulces();
     }
 
     @Override

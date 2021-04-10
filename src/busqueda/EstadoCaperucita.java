@@ -79,7 +79,7 @@ public class EstadoCaperucita extends SearchBasedAgentState {
     public void initState() {
         this.vidas = 3;
         this.cantidadActualDulces = 0;
-        this.posicion = escenario.getPosicionIncial();
+        this.posicion = escenario.getPosicionInicialCaperucita();
         this.cantidadTotalDulces = escenario.getCantidadDulces();
     }
 
