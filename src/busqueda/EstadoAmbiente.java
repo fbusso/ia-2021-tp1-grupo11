@@ -57,7 +57,8 @@ public class EstadoAmbiente extends EnvironmentState {
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return null;
+        return "\n" +
+                "- Posición actual de Caperucita: Fila " + posicionCaperucita.i + ", Columna " + posicionCaperucita.j + "\n" +
+                "- Cantidad de dulces a recolectar restantes: " + (cantidadTotalDulces - cantidadDulcesRecolectados);
     }
 }
