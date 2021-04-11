@@ -24,7 +24,7 @@ public class AuxiliarIrDerecha extends AuxiliarMovimiento {
      * @param matriz:         representación matricial del escenario
      * @param posicionActual: posición actual de Caperucita
      */
-    private void calcularAuxiliares(char[][] matriz, Posicion posicionActual) {
+    protected void calcularAuxiliares(char[][] matriz, Posicion posicionActual) {
         int indice = posicionActual.j + 1;
         while (indice <= matriz[0].length && matriz[posicionActual.i][indice] != 'A') {
             if (matriz[posicionActual.i][indice] == 'D') {
