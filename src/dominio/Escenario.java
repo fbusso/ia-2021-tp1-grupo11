@@ -35,7 +35,7 @@ public class Escenario {
         }
     }
 
-    public Boolean esCampoDeFlores(Posicion posicion) {
+    public static Boolean esCampoDeFlores(char[][] matriz, Posicion posicion) {
         return matriz[posicion.i][posicion.j] == 'F';
     }
 
