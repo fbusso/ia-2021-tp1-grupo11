@@ -4,12 +4,7 @@ import dominio.Posicion;
 
 import java.util.ArrayList;
 
-public class AuxiliarIrAbajo {
-
-    private final ArrayList<Posicion> posicionesDulces;
-    private Integer cantidadDulcesEnCamino;
-    private Boolean loboEnCamino;
-    private Posicion posicionFinal;
+public class AuxiliarIrAbajo extends AuxiliarMovimiento {
 
     public AuxiliarIrAbajo(char[][] matriz, Posicion posicionActual) {
         // Inicializar valores auxiliares.
