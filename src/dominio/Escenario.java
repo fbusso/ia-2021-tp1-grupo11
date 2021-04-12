@@ -1,17 +1,16 @@
 package dominio;
 
-import auxiliar.AuxiliarCsv;
-
 import java.util.List;
 
 public class Escenario {
 
     private char[][] matriz;
     private Integer cantidadDulces;
-    private Posicion posicionIncial;
+    private Posicion posicionInicialCaperucita;
+    private Posicion posicionInicialLobo;
 
-    public Escenario() {
-        matriz = AuxiliarCsv.obtenerMatriz();
+    public Escenario(char[][] matriz) {
+        this.matriz = matriz;
         calculosAuxiliares();
     }
 
@@ -27,14 +26,16 @@ public class Escenario {
         for (int i = 0; i < matriz.length; i++) {
             for (int j = 0; j < matriz[0].length; j++) {
                 if (matriz[i][j] == 'C')
-                    posicionIncial = new Posicion(i, j);
-                if (matriz[i][j] == 'D')
+                    posicionInicialCaperucita = new Posicion(i, j);
+                else if (matriz[i][j] == 'L')
+                    posicionInicialLobo = new Posicion(i, j);
+                else if (matriz[i][j] == 'D')
                     cantidadDulces++;
             }
         }
     }
 
-    public Boolean esCampoDeFlores(Posicion posicion) {
+    public static Boolean esCampoDeFlores(char[][] matriz, Posicion posicion) {
         return matriz[posicion.i][posicion.j] == 'F';
     }
 
@@ -50,8 +51,15 @@ public class Escenario {
         return cantidadDulces;
     }
 
-    public Posicion getPosicionIncial() {
-        return posicionIncial;
+    public Posicion getPosicionInicialCaperucita() {
+        return posicionInicialCaperucita;
     }
 
+    public Posicion getPosicionInicialLobo() {
+        return posicionInicialLobo;
+    }
+
+    public void setPosicionInicialLobo(Posicion posicionInicialLobo) {
+        this.posicionInicialLobo = posicionInicialLobo;
+    }
 }

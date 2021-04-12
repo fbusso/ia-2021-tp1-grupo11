@@ -4,12 +4,7 @@ import dominio.Posicion;
 
 import java.util.ArrayList;
 
-public class AuxiliarIrAbajo {
-
-    private final ArrayList<Posicion> posicionesDulces;
-    private Posicion posicionFinal;
-    private Boolean loboEnCamino;
-    private Integer cantidadDulcesEnCamino;
+public class AuxiliarIrAbajo extends AuxiliarMovimiento {
 
     public AuxiliarIrAbajo(char[][] matriz, Posicion posicionActual) {
         // Inicializar valores auxiliares.
@@ -30,9 +25,10 @@ public class AuxiliarIrAbajo {
      * para moverse "hacia abajo" hay que sumar en el valor de la fila.
      *
      * @param matriz:         representación matricial del escenario
-     * @param posicionActual: poisición actual de Caperucita
+     * @param posicionActual: posición actual de Caperucita
      */
-    private void calcularAuxiliares(char[][] matriz, Posicion posicionActual) {
+    @Override
+    protected void calcularAuxiliares(char[][] matriz, Posicion posicionActual) {
         int indice = posicionActual.i + 1;
         while (indice < matriz.length && matriz[indice][posicionActual.j] != 'A') {
             if (matriz[indice][posicionActual.j] == 'D') {
@@ -46,19 +42,4 @@ public class AuxiliarIrAbajo {
         cantidadDulcesEnCamino = posicionesDulces.size();
     }
 
-    public Posicion getPosicionFinal() {
-        return posicionFinal;
-    }
-
-    public Boolean getLoboEnCamino() {
-        return loboEnCamino;
-    }
-
-    public ArrayList<Posicion> getPosicionesDulces() {
-        return posicionesDulces;
-    }
-
-    public Integer getCantidadDulcesEnCamino() {
-        return cantidadDulcesEnCamino;
-    }
 }

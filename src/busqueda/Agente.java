@@ -18,16 +18,15 @@ import java.util.logging.Logger;
 
 public class Agente extends SearchBasedAgent {
 
-    public Agente() {
+    public Agente(char[][] escenario) {
 
         // Objetivo del agente.
         ObjetivoAgente objetivoAgente = new ObjetivoAgente();
 
         // Estado del agente.
-        EstadoCaperucita estadoAgente = new EstadoCaperucita();
+        EstadoCaperucita estadoAgente = new EstadoCaperucita(escenario);
         this.setAgentState(estadoAgente);
 
-        // TODO: Agregar el resto
         // Operadores.
         Vector<SearchAction> operadores = new Vector<SearchAction>();
         operadores.addElement(new IrArriba());

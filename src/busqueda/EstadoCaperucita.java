@@ -7,13 +7,17 @@ import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 
 public class EstadoCaperucita extends SearchBasedAgentState {
 
-    private Posicion posicion;
-    private Integer vidas;
     private Integer cantidadActualDulces;
     private Integer cantidadTotalDulces;
     private Escenario escenario;
+    private Posicion posicion;
+    private Integer vidas;
 
     public EstadoCaperucita() {
+    }
+
+    public EstadoCaperucita(char[][] escenario) {
+        this.escenario = new Escenario(escenario);
         this.initState();
     }
 
@@ -73,11 +77,10 @@ public class EstadoCaperucita extends SearchBasedAgentState {
 
     @Override
     public void initState() {
-        vidas = 3;
-        cantidadActualDulces = 0;
-        escenario = new Escenario();
-        posicion = escenario.getPosicionIncial();
-        cantidadTotalDulces = escenario.getCantidadDulces();
+        this.vidas = 3;
+        this.cantidadActualDulces = 0;
+        this.posicion = escenario.getPosicionInicialCaperucita();
+        this.cantidadTotalDulces = escenario.getCantidadDulces();
     }
 
     @Override

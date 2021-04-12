@@ -2,11 +2,10 @@ package auxiliar;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.Arrays;
 
 
-public class AuxiliarCsv {
+public class AuxiliarEscenario {
     private static final String ESCENARIO_EJEMPLO = "resources\\escenario_ejemplo.txt";
     private static final String ESCENARIO_MOVER_ABAJO_EXITO = "resources\\escenario_mover_abajo_exito.txt";
     private static final String ESCENARIO_MOVER_ABAJO_Y_ARRIBA = "resources\\escenario_mover_abajo_y_arriba.txt";
@@ -19,7 +18,7 @@ public class AuxiliarCsv {
 
     public static char[][] obtenerMatriz() {
         try {
-            BufferedReader csvReader = new BufferedReader(new FileReader(ESCENARIO_PERSONALIZADO));
+            BufferedReader csvReader = new BufferedReader(new FileReader(ESCENARIO_EJEMPLO));
             int i = 0, j = 0;
             char[][] matriz = new char[9][14];
 
@@ -42,7 +41,7 @@ public class AuxiliarCsv {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         char[][] matriz = obtenerMatriz();
         System.out.println(Arrays.deepToString(matriz));
     }

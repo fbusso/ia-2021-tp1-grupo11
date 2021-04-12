@@ -6,8 +6,8 @@ import frsf.cidisi.faia.environment.Environment;
 
 public class Ambiente extends Environment {
 
-    public Ambiente() {
-        this.environmentState = new EstadoAmbiente();
+    public Ambiente(char[][] escenario) {
+        this.environmentState = new EstadoAmbiente(escenario);
     }
 
     public EstadoAmbiente getEnvironmentState() {

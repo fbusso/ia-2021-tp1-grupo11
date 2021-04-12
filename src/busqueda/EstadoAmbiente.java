@@ -6,12 +6,14 @@ import frsf.cidisi.faia.state.EnvironmentState;
 
 public class EstadoAmbiente extends EnvironmentState {
 
+    private Integer cantidadDulcesRecolectados;
+    private Integer cantidadTotalDulces;
     private Escenario escenario;
     private Posicion posicionCaperucita;
-    private Integer cantidadTotalDulces;
-    private Integer cantidadDulcesRecolectados;
+    private Posicion posicionLobo;
 
-    public EstadoAmbiente() {
+    public EstadoAmbiente(char[][] escenario) {
+        this.escenario = new Escenario(escenario);
         this.initState();
     }
 
@@ -49,15 +51,16 @@ public class EstadoAmbiente extends EnvironmentState {
 
     @Override
     public void initState() {
-        this.escenario = new Escenario();
-        this.posicionCaperucita = escenario.getPosicionIncial();
-        this.cantidadTotalDulces = escenario.getCantidadDulces();
+        this.posicionCaperucita = escenario.getPosicionInicialCaperucita();
+        this.posicionLobo = escenario.getPosicionInicialLobo();
         this.cantidadDulcesRecolectados = 0;
+        this.cantidadTotalDulces = escenario.getCantidadDulces();
     }
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return null;
+        return "\n" +
+                "- Posición actual de Caperucita: Fila " + posicionCaperucita.i + ", Columna " + posicionCaperucita.j + "\n" +
+                "- Cantidad de dulces a recolectar restantes: " + (cantidadTotalDulces - cantidadDulcesRecolectados);
     }
 }

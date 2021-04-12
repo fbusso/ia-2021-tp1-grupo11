@@ -4,12 +4,7 @@ import dominio.Posicion;
 
 import java.util.ArrayList;
 
-public class AuxiliarIrIzquierda {
-
-    private final ArrayList<Posicion> posicionesDulces;
-    private Posicion posicionFinal;
-    private Boolean loboEnCamino;
-    private Integer cantidadDulcesEnCamino;
+public class AuxiliarIrIzquierda extends AuxiliarMovimiento {
 
     public AuxiliarIrIzquierda(char[][] matriz, Posicion posicionActual) {
         // Inicializar valores auxiliares.
@@ -27,9 +22,10 @@ public class AuxiliarIrIzquierda {
      * Verifica si el lobo está en el camino a recorrer.
      *
      * @param matriz:         representación matricial del escenario
-     * @param posicionActual: poisición actual de Caperucita
+     * @param posicionActual: posición actual de Caperucita
      */
-    private void calcularAuxiliares(char[][] matriz, Posicion posicionActual) {
+    @Override
+    protected void calcularAuxiliares(char[][] matriz, Posicion posicionActual) {
         int indice = posicionActual.j - 1;
         while (indice >= 0 && matriz[posicionActual.i][indice] != 'A') {
             if (matriz[posicionActual.i][indice] == 'D') {
@@ -43,19 +39,4 @@ public class AuxiliarIrIzquierda {
         cantidadDulcesEnCamino = posicionesDulces.size();
     }
 
-    public Posicion getPosicionFinal() {
-        return posicionFinal;
-    }
-
-    public Boolean getLoboEnCamino() {
-        return loboEnCamino;
-    }
-
-    public ArrayList<Posicion> getPosicionesDulces() {
-        return posicionesDulces;
-    }
-
-    public Integer getCantidadDulcesEnCamino() {
-        return cantidadDulcesEnCamino;
-    }
 }
