@@ -39,19 +39,4 @@ public class AuxiliarIrIzquierda extends AuxiliarMovimiento {
         cantidadDulcesEnCamino = posicionesDulces.size();
     }
 
-    public Posicion getPosicionFinal() {
-        return posicionFinal;
-    }
-
-    public Boolean getLoboEnCamino() {
-        return loboEnCamino;
-    }
-
-    public ArrayList<Posicion> getPosicionesDulces() {
-        return posicionesDulces;
-    }
-
-    public Integer getCantidadDulcesEnCamino() {
-        return cantidadDulcesEnCamino;
-    }
 }
