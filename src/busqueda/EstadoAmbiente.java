@@ -49,10 +49,18 @@ public class EstadoAmbiente extends EnvironmentState {
         this.cantidadTotalDulces = cantidadTotalDulces;
     }
 
+    public Posicion getPosicionLobo() {
+        return posicionLobo;
+    }
+
+    public void setPosicionLobo(Posicion posicionLobo) {
+        this.posicionLobo = posicionLobo;
+    }
+
     @Override
     public void initState() {
         this.posicionCaperucita = escenario.getPosicionInicialCaperucita();
-        this.posicionLobo = escenario.getPosicionInicialLobo();
+        this.posicionLobo = escenario.getPosicionActualLobo();
         this.cantidadDulcesRecolectados = 0;
         this.cantidadTotalDulces = escenario.getCantidadDulces();
     }
@@ -61,6 +69,7 @@ public class EstadoAmbiente extends EnvironmentState {
     public String toString() {
         return "\n" +
                 "- Posición actual de Caperucita: Fila " + posicionCaperucita.i + ", Columna " + posicionCaperucita.j + "\n" +
+                "- Posición actual del Lobo: Fila " + posicionLobo.i + ", Columna " + posicionLobo.j + "\n" +
                 "- Cantidad de dulces a recolectar restantes: " + (cantidadTotalDulces - cantidadDulcesRecolectados);
     }
 }

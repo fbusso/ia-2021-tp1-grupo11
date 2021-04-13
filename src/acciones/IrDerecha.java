@@ -28,8 +28,6 @@ public class IrDerecha extends SearchAction {
             estado.setPosicion(auxiliar.getPosicionFinal());
             estado.setCantidadActualDulces(nuevaCantidadDulces);
 
-            // TODO: Revisar por que esto rompe todo
-            // estado.getEscenario().setMatriz(Escenario.removerDulces(matriz, auxiliar.getPosicionesDulces()));
             return estado;
         }
 

@@ -2,12 +2,11 @@ package auxiliar;
 
 import dominio.Posicion;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AuxiliarMovimiento {
 
-    protected ArrayList<Posicion> posicionesDulces;
+    protected List<Posicion> posicionesDulces;
     protected Integer cantidadDulcesEnCamino;
     protected Boolean loboEnCamino;
     protected Posicion posicionFinal;
