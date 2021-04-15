@@ -11,6 +11,7 @@ public class Escenario {
     private char[][] matriz;
     private Posicion posicionActualCaperucita;
     private Posicion posicionActualLobo;
+    private Posicion posicionCampoFlores;
     private Posicion posicionInicialCaperucita;
     private List<Posicion> posicionesPosiblesLobo;
 
@@ -70,14 +71,20 @@ public class Escenario {
         nuevoEscenario.posicionesPosiblesLobo.add(new Posicion(escenario.posicionActualLobo.i, escenario.posicionActualLobo.j));
 
         // Se elige la primer posición posible de la lista de posiciones mezclada.
-        Posicion nuevaPosicionLobo = nuevoEscenario.posicionesPosiblesLobo.remove(0);
-        nuevoEscenario.matriz[nuevaPosicionLobo.i][nuevaPosicionLobo.j] = 'L';
-        nuevoEscenario.posicionActualLobo = nuevaPosicionLobo;
+        if (!nuevoEscenario.posicionesPosiblesLobo.isEmpty()) {
+            Posicion nuevaPosicionLobo = nuevoEscenario.posicionesPosiblesLobo.remove(0);
+            nuevoEscenario.matriz[nuevaPosicionLobo.i][nuevaPosicionLobo.j] = 'L';
+            nuevoEscenario.posicionActualLobo = nuevaPosicionLobo;
+        }
         return nuevoEscenario;
     }
 
-    public static Boolean esCampoDeFlores(char[][] matriz, Posicion posicion) {
-        return matriz[posicion.i][posicion.j] == 'F';
+    // TODO: Cambiar
+    public static Boolean esCampoDeFlores(Escenario escenario, Posicion posicion) {
+
+        return posicion.equals(new Posicion(7, 7)) || posicion.equals(new Posicion(8, 7));
+
+//        return escenario.posicionCampoFlores.equals(posicion);
     }
 
     /**
@@ -119,6 +126,8 @@ public class Escenario {
                     posicionActualLobo = new Posicion(i, j);
                 } else if (matriz[i][j] == 'D') {
                     cantidadDulces++;
+                } else if (matriz[i][j] == 'F') {
+                    posicionCampoFlores = new Posicion(i, j);
                 } else if (Escenario.esPosicionPosibleLobo(matriz, i, j)) {
                     posicionesPosiblesLobo.add(new Posicion(i, j));
                 }
@@ -127,6 +136,9 @@ public class Escenario {
 
         // Se mezcla la lista de posiciones para que el lobo aparezca en posiciones aleatorias.
         Collections.shuffle(posicionesPosiblesLobo);
+
+        // TODO: Eliminar
+        posicionesPosiblesLobo = Collections.emptyList();
     }
 
     public char[][] getMatriz() {

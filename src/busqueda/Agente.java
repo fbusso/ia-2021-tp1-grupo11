@@ -29,12 +29,13 @@ public class Agente extends SearchBasedAgent {
         // Operadores.
         Vector<SearchAction> operadores = new Vector<SearchAction>();
         operadores.addElement(new IrArriba());
-        operadores.addElement(new IrArribaPerderVida());
         operadores.addElement(new IrAbajo());
-        operadores.addElement(new IrAbajoPerderVida());
         operadores.addElement(new IrDerecha());
-        operadores.addElement(new IrDerechaPerderVida());
         operadores.addElement(new IrIzquierda());
+
+        operadores.addElement(new IrArribaPerderVida());
+        operadores.addElement(new IrAbajoPerderVida());
+        operadores.addElement(new IrDerechaPerderVida());
         operadores.addElement(new IrIzquierdaPerderVida());
 
 
@@ -54,7 +55,6 @@ public class Agente extends SearchBasedAgent {
          */
         BreathFirstSearch estrategia = new BreathFirstSearch();
         Search busqueda = new Search(estrategia);
-
 
         // Genera un archivo XML del árbol de búsqueda.
         busqueda.setVisibleTree(Search.EFAIA_TREE);
