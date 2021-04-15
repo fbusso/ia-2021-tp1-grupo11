@@ -49,6 +49,7 @@ public class Escenario {
         nuevoEscenario.posicionActualLobo = escenario.posicionActualLobo.clone();
         nuevoEscenario.posicionesPosiblesLobo = new ArrayList<Posicion>(escenario.posicionesPosiblesLobo);
         nuevoEscenario.posicionInicialCaperucita = escenario.posicionInicialCaperucita.clone();
+        nuevoEscenario.posicionCampoFlores = escenario.posicionCampoFlores;
 
         // Elimina los dulces recolectados en el nuevo escenario y actualiza el contador.
         for (Posicion posicion : posicionesDulces) {
@@ -81,10 +82,7 @@ public class Escenario {
 
     // TODO: Cambiar
     public static Boolean esCampoDeFlores(Escenario escenario, Posicion posicion) {
-
-        return posicion.equals(new Posicion(7, 7)) || posicion.equals(new Posicion(8, 7));
-
-//        return escenario.posicionCampoFlores.equals(posicion);
+        return escenario.posicionCampoFlores.equals(posicion);
     }
 
     /**
@@ -137,7 +135,7 @@ public class Escenario {
         // Se mezcla la lista de posiciones para que el lobo aparezca en posiciones aleatorias.
         Collections.shuffle(posicionesPosiblesLobo);
 
-        // TODO: Eliminar
+        // TODO: Eliminar. Se usa una lista vacía para probar movimientos
         posicionesPosiblesLobo = Collections.emptyList();
     }
 
@@ -192,11 +190,12 @@ public class Escenario {
     @Override
     public Escenario clone() {
         Escenario nuevoEscenario = new Escenario();
-        nuevoEscenario.matriz = this.matriz.clone();
+        nuevoEscenario.matriz = this.matriz;
         nuevoEscenario.posicionesPosiblesLobo = this.posicionesPosiblesLobo;
         nuevoEscenario.posicionActualCaperucita = this.posicionActualCaperucita.clone();
         nuevoEscenario.posicionInicialCaperucita = this.posicionInicialCaperucita.clone();
         nuevoEscenario.cantidadDulces = this.cantidadDulces;
+        nuevoEscenario.posicionCampoFlores = this.posicionCampoFlores;
         nuevoEscenario.posicionActualLobo = this.posicionActualLobo.clone();
 
         return nuevoEscenario;
