@@ -1,15 +1,17 @@
 package dominio;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class Escenario {
 
-    private char[][] matriz;
     private Integer cantidadDulces;
-    private Posicion posicionInicialCaperucita;
+    private char[][] matriz;
+    private Posicion posicionActualCaperucita;
     private Posicion posicionActualLobo;
+    private Posicion posicionInicialCaperucita;
     private List<Posicion> posicionesPosiblesLobo;
 
     private Escenario() {
@@ -30,36 +32,36 @@ public class Escenario {
         return matriz;
     }
 
-    public char[][] actualizarEscenario(List<Posicion> posicionesDulces) {
-        for (Posicion posicion : posicionesDulces) {
-            matriz[posicion.i][posicion.j] = ' ';
-        }
-
-        matriz[posicionActualLobo.i][posicionActualLobo.j] = ' ';
-        Posicion nuevaPosicionLobo = posicionesPosiblesLobo.get(new Random().nextInt(posicionesPosiblesLobo.size()));
-        posicionesPosiblesLobo.add(posicionActualLobo);
-        matriz[nuevaPosicionLobo.i][nuevaPosicionLobo.j] = 'L';
-        posicionActualLobo = nuevaPosicionLobo;
-
-        return matriz;
-    }
-
-    public static Escenario obtenerEscenarioActualizado(Escenario escenario, List<Posicion> posicionesDulces) {
+    /**
+     * Retorna un escenario modificado, producido por un movimiento de caperucita.
+     *
+     * @param escenario               escenario actual a obtener modificado.
+     * @param nuevaPosicionCaperucita posicion de Caperucita luego de realizar el movimiento.
+     * @param posicionesDulces        posiciones de los dulces recolectados en el movimiento.
+     */
+    public static Escenario obtenerEscenarioActualizado(Escenario escenario, Posicion nuevaPosicionCaperucita, List<Posicion> posicionesDulces) {
         Escenario nuevoEscenario = new Escenario();
 
         // Clonar las propiedades del escenario viejo en el nuevo escenario.
         // No es necesario copiar la cantidad de dulces, dado que va a ser sobreescrita.
-        nuevoEscenario.matriz = escenario.matriz;
-        nuevoEscenario.posicionActualLobo = escenario.posicionActualLobo;
-        nuevoEscenario.posicionesPosiblesLobo = escenario.posicionesPosiblesLobo;
-        nuevoEscenario.posicionInicialCaperucita = escenario.posicionInicialCaperucita;
+        nuevoEscenario.matriz = escenario.matriz.clone();
+        nuevoEscenario.posicionActualLobo = escenario.posicionActualLobo.clone();
+        nuevoEscenario.posicionesPosiblesLobo = new ArrayList<Posicion>(escenario.posicionesPosiblesLobo);
+        nuevoEscenario.posicionInicialCaperucita = escenario.posicionInicialCaperucita.clone();
 
-        // Actualizar las posiciones de los dulces en el nuevo escenario
+        // Elimina los dulces recolectados en el nuevo escenario y actualiza el contador.
         for (Posicion posicion : posicionesDulces) {
             nuevoEscenario.matriz[posicion.i][posicion.j] = ' ';
         }
+        nuevoEscenario.cantidadDulces = escenario.getCantidadDulces();
 
-        nuevoEscenario.cantidadDulces = escenario.getCantidadDulces() - posicionesDulces.size();
+        // TODO: Revisar
+        // Se reemplaza la posición actual de Caperucita por una celda vacía.
+        nuevoEscenario.matriz[escenario.posicionActualCaperucita.i][escenario.posicionActualCaperucita.j] = ' ';
+
+        // Se actualiza la posición actual de caperucita
+        nuevoEscenario.setPosicionActualCaperucita(nuevaPosicionCaperucita.clone());
+        nuevoEscenario.matriz[nuevaPosicionCaperucita.i][nuevaPosicionCaperucita.j] = 'C';
 
         // Se reemplaza la posición actual del lobo por una celda vacía.
         nuevoEscenario.matriz[nuevoEscenario.posicionActualLobo.i][nuevoEscenario.posicionActualLobo.j] = ' ';
@@ -67,44 +69,25 @@ public class Escenario {
         // Se agrega la posición previa del lobo como una nueva posición posible.
         nuevoEscenario.posicionesPosiblesLobo.add(new Posicion(escenario.posicionActualLobo.i, escenario.posicionActualLobo.j));
 
-        // De las posibles posiciones del lobo, se elige una de manera aleatoria como nueva posición.
-        Posicion nuevaPosicionLobo = nuevoEscenario.posicionesPosiblesLobo.get(new Random().nextInt(nuevoEscenario.posicionesPosiblesLobo.size()));
+        // Se elige la primer posición posible de la lista de posiciones mezclada.
+        Posicion nuevaPosicionLobo = nuevoEscenario.posicionesPosiblesLobo.remove(0);
         nuevoEscenario.matriz[nuevaPosicionLobo.i][nuevaPosicionLobo.j] = 'L';
         nuevoEscenario.posicionActualLobo = nuevaPosicionLobo;
-
         return nuevoEscenario;
-    }
-
-
-    private void calculosAuxiliares() {
-        cantidadDulces = 0;
-        for (int i = 0; i < matriz.length; i++) {
-            for (int j = 0; j < matriz[0].length; j++) {
-                if (matriz[i][j] == 'C')
-                    posicionInicialCaperucita = new Posicion(i, j);
-                else if (matriz[i][j] == 'L')
-                    posicionActualLobo = new Posicion(i, j);
-                else if (matriz[i][j] == 'D')
-                    cantidadDulces++;
-                else if (Escenario.esPosicionPosibleLobo(matriz, i, j))
-                    posicionesPosiblesLobo.add(new Posicion(i, j));
-            }
-        }
     }
 
     public static Boolean esCampoDeFlores(char[][] matriz, Posicion posicion) {
         return matriz[posicion.i][posicion.j] == 'F';
     }
 
-
     /**
      * Determina si una posición cumple las condiciones para que el lobo aparezca en ella.
-     * Se implementa utilizando Excepciones para no contemplar casos particulares en valores límite de la matriz
+     * Se implementa utilizando Excepciones para no contemplar casos particulares en valores límite de la matriz.
      *
-     * @param matriz: matriz de escenario
-     * @param i:      índice correspondiente a la fila.
-     * @param j:      índice correspondiente a la columna.
-     * @return: si la posición es apta para que el lobo aparezca en ella.
+     * @param matriz matriz de escenario
+     * @param i      índice correspondiente a la fila.
+     * @param j      índice correspondiente a la columna.
+     * @return si la posición es apta para que el lobo aparezca en ella.
      */
     private static Boolean esPosicionPosibleLobo(char[][] matriz, Integer i, Integer j) {
         boolean esPosicionPosible = false;
@@ -116,6 +99,34 @@ public class Escenario {
         }
 
         return esPosicionPosible;
+    }
+
+    public char[][] actualizarEscenario(List<Posicion> posicionesDulces) {
+        for (Posicion posicion : posicionesDulces) {
+            matriz[posicion.i][posicion.j] = ' ';
+        }
+        return matriz;
+    }
+
+    private void calculosAuxiliares() {
+        cantidadDulces = 0;
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[0].length; j++) {
+                if (matriz[i][j] == 'C') {
+                    posicionInicialCaperucita = new Posicion(i, j);
+                    posicionActualCaperucita = new Posicion(i, j);
+                } else if (matriz[i][j] == 'L') {
+                    posicionActualLobo = new Posicion(i, j);
+                } else if (matriz[i][j] == 'D') {
+                    cantidadDulces++;
+                } else if (Escenario.esPosicionPosibleLobo(matriz, i, j)) {
+                    posicionesPosiblesLobo.add(new Posicion(i, j));
+                }
+            }
+        }
+
+        // Se mezcla la lista de posiciones para que el lobo aparezca en posiciones aleatorias.
+        Collections.shuffle(posicionesPosiblesLobo);
     }
 
     public char[][] getMatriz() {
@@ -130,8 +141,24 @@ public class Escenario {
         return cantidadDulces;
     }
 
+    public void setCantidadDulces(Integer cantidadDulces) {
+        this.cantidadDulces = cantidadDulces;
+    }
+
     public Posicion getPosicionInicialCaperucita() {
         return posicionInicialCaperucita;
+    }
+
+    public void setPosicionInicialCaperucita(Posicion posicionInicialCaperucita) {
+        this.posicionInicialCaperucita = posicionInicialCaperucita;
+    }
+
+    public Posicion getPosicionActualCaperucita() {
+        return posicionActualCaperucita;
+    }
+
+    public void setPosicionActualCaperucita(Posicion posicionActualCaperucita) {
+        this.posicionActualCaperucita = posicionActualCaperucita;
     }
 
     public Posicion getPosicionActualLobo() {
@@ -140,5 +167,35 @@ public class Escenario {
 
     public void setPosicionActualLobo(Posicion posicionActualLobo) {
         this.posicionActualLobo = posicionActualLobo;
+    }
+
+    public List<Posicion> getPosicionesPosiblesLobo() {
+        return posicionesPosiblesLobo;
+    }
+
+    public void setPosicionesPosiblesLobo(List<Posicion> posicionesPosiblesLobo) {
+        this.posicionesPosiblesLobo = posicionesPosiblesLobo;
+    }
+
+    @Override
+    public Escenario clone() {
+        Escenario nuevoEscenario = new Escenario();
+        nuevoEscenario.matriz = this.matriz.clone();
+        nuevoEscenario.posicionesPosiblesLobo = this.posicionesPosiblesLobo;
+        nuevoEscenario.posicionActualCaperucita = this.posicionActualCaperucita.clone();
+        nuevoEscenario.posicionInicialCaperucita = this.posicionInicialCaperucita.clone();
+        nuevoEscenario.cantidadDulces = this.cantidadDulces;
+        nuevoEscenario.posicionActualLobo = this.posicionActualLobo.clone();
+
+        return nuevoEscenario;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder matrizStringBuilder = new StringBuilder("MATRIZ: \n");
+        for (char[] linea : this.matriz) {
+            matrizStringBuilder.append((Arrays.toString(linea))).append('\n');
+        }
+        return matrizStringBuilder.toString();
     }
 }

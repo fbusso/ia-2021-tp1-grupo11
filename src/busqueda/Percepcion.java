@@ -1,50 +1,37 @@
 package busqueda;
 
-import dominio.Posicion;
+import dominio.Escenario;
 import frsf.cidisi.faia.agent.Agent;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.environment.Environment;
 
+import java.util.Arrays;
+
 public class Percepcion extends Perception {
 
-    private char[][] matriz;
-    private Integer cantidadAcualDulces;
-    private Posicion posicionActual;
+    private Escenario escenario;
 
     @Override
     public void initPerception(Agent agent, Environment environment) {
         EstadoAmbiente estadoAmbiente = (EstadoAmbiente) environment.getEnvironmentState();
-        posicionActual = estadoAmbiente.getPosicionCaperucita();
-        cantidadAcualDulces = estadoAmbiente.getCantidadTotalDulces();
-        matriz = estadoAmbiente.getEscenario().getMatriz();
+        escenario = estadoAmbiente.getEscenario();
     }
 
-    public char[][] getMatriz() {
-        return matriz;
+    public Escenario getEscenario() {
+        return escenario;
     }
 
-    public void setMatriz(char[][] matriz) {
-        this.matriz = matriz;
-    }
-
-    public Integer getCantidadAcualDulces() {
-        return cantidadAcualDulces;
-    }
-
-    public void setCantidadAcualDulces(Integer cantidadAcualDulces) {
-        this.cantidadAcualDulces = cantidadAcualDulces;
-    }
-
-    public Posicion getPosicionActual() {
-        return posicionActual;
-    }
-
-    public void setPosicionActual(Posicion posicionActual) {
-        this.posicionActual = posicionActual;
+    public void setEscenario(Escenario escenario) {
+        this.escenario = escenario;
     }
 
     @Override
     public String toString() {
-        return "\n- Posición actual de Caperucita: Fila " + posicionActual.i + ", Columna " + posicionActual.j;
+        StringBuilder stringPercepcion = new StringBuilder("\n");
+        for (char[] linea : escenario.getMatriz()) {
+            stringPercepcion.append((Arrays.toString(linea))).append('\n');
+        }
+
+        return stringPercepcion.toString();
     }
 }

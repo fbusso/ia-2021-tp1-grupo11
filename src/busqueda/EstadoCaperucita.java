@@ -5,7 +5,7 @@ import dominio.Posicion;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 
-public class EstadoCaperucita extends SearchBasedAgentState {
+public class EstadoCaperucita extends SearchBasedAgentState implements Cloneable {
 
     private Integer cantidadActualDulces;
     private Integer cantidadTotalDulces;
@@ -16,8 +16,8 @@ public class EstadoCaperucita extends SearchBasedAgentState {
     public EstadoCaperucita() {
     }
 
-    public EstadoCaperucita(char[][] escenario) {
-        this.escenario = new Escenario(escenario);
+    public EstadoCaperucita(Escenario escenario) {
+        this.escenario = escenario;
         this.initState();
     }
 
@@ -65,19 +65,18 @@ public class EstadoCaperucita extends SearchBasedAgentState {
     @Override
     public SearchBasedAgentState clone() {
         EstadoCaperucita nuevoEstado = new EstadoCaperucita();
-
         nuevoEstado.setVidas(this.vidas);
-        nuevoEstado.setEscenario(this.escenario);
+        nuevoEstado.setEscenario(this.escenario.clone());
         nuevoEstado.setCantidadActualDulces(this.cantidadActualDulces);
         nuevoEstado.setCantidadTotalDulces(this.cantidadTotalDulces);
-        nuevoEstado.setPosicion(this.posicion);
+        nuevoEstado.setPosicion(this.posicion.clone());
 
         return nuevoEstado;
     }
 
     @Override
     public void initState() {
-        this.vidas = 3;
+        this.vidas = 100;
         this.cantidadActualDulces = 0;
         this.posicion = escenario.getPosicionInicialCaperucita();
         this.cantidadTotalDulces = escenario.getCantidadDulces();
@@ -86,19 +85,18 @@ public class EstadoCaperucita extends SearchBasedAgentState {
     @Override
     public void updateState(Perception p) {
         Percepcion percepcion = (Percepcion) p;
-        this.cantidadActualDulces = percepcion.getCantidadAcualDulces();
-        this.posicion = percepcion.getPosicionActual();
-        this.escenario.setMatriz(percepcion.getMatriz());
+        this.escenario = percepcion.getEscenario();
+        this.posicion = percepcion.getEscenario().getPosicionActualCaperucita();
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof EstadoCaperucita)) {
+    public boolean equals(Object estado) {
+        if (!(estado instanceof EstadoCaperucita)) {
             return false;
         } else {
-            return ((EstadoCaperucita) obj).getVidas().equals(this.getVidas()) &&
-                    ((EstadoCaperucita) obj).getPosicion().equals(this.getPosicion()) &&
-                    ((EstadoCaperucita) obj).getCantidadActualDulces().equals(this.getCantidadActualDulces());
+            return ((EstadoCaperucita) estado).getVidas().equals(this.getVidas()) &&
+                    ((EstadoCaperucita) estado).getPosicion().equals(this.getPosicion()) &&
+                    ((EstadoCaperucita) estado).getCantidadActualDulces().equals(this.getCantidadActualDulces());
         }
     }
 
@@ -109,4 +107,5 @@ public class EstadoCaperucita extends SearchBasedAgentState {
                 "- Vidas restantes: " + vidas + "\n" +
                 "- Dulces recolectados: " + cantidadActualDulces + "\n";
     }
+
 }

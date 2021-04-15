@@ -8,8 +8,7 @@ import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 
-public class IrArriba extends Movimiento {
-
+public class IrArribaPerderVida extends PerderVida {
     /**
      * Actualiza un nodo del árbol de búsqueda mientras se ejecuta el algoritmo.
      * No actualiza el estado del mundo real.
@@ -47,6 +46,6 @@ public class IrArriba extends Movimiento {
      */
     @Override
     public String toString() {
-        return "irArriba";
+        return "irArribaPerderVida";
     }
 }

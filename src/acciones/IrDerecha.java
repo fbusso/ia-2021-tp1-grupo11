@@ -3,14 +3,12 @@ package acciones;
 import auxiliar.AuxiliarIrDerecha;
 import busqueda.EstadoAmbiente;
 import busqueda.EstadoCaperucita;
-import dominio.Escenario;
 import dominio.Posicion;
-import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 
-public class IrDerecha extends SearchAction {
+public class IrDerecha extends Movimiento {
 
     /**
      * Actualiza un nodo del árbol de búsqueda mientras se ejecuta el algoritmo.
@@ -22,16 +20,7 @@ public class IrDerecha extends SearchAction {
         char[][] matriz = estado.getEscenario().getMatriz();
         Posicion posicionActual = estado.getPosicion();
         AuxiliarIrDerecha auxiliar = new AuxiliarIrDerecha(matriz, posicionActual);
-
-        if (!auxiliar.getLoboEnCamino()) {
-            Integer nuevaCantidadDulces = estado.getCantidadActualDulces() + auxiliar.getCantidadDulcesEnCamino();
-            estado.setPosicion(auxiliar.getPosicionFinal());
-            estado.setCantidadActualDulces(nuevaCantidadDulces);
-
-            return estado;
-        }
-
-        return null;
+        return obtenerEstadoActualizado(auxiliar, estado);
     }
 
     /**
@@ -45,24 +34,7 @@ public class IrDerecha extends SearchAction {
         char[][] matriz = estadoAgente.getEscenario().getMatriz();
         Posicion posicionActual = estadoAgente.getPosicion();
         AuxiliarIrDerecha auxiliar = new AuxiliarIrDerecha(matriz, posicionActual);
-
-        if (!auxiliar.getLoboEnCamino()) {
-            Integer cantidadDulcesActualizada = estadoAgente.getCantidadActualDulces() + auxiliar.getCantidadDulcesEnCamino();
-            char[][] matrizActualizada = Escenario.removerDulces(matriz, auxiliar.getPosicionesDulces());
-
-            // Actualización del estado del agente
-            estadoAgente.setPosicion(auxiliar.getPosicionFinal());
-            estadoAgente.setCantidadActualDulces(cantidadDulcesActualizada);
-            estadoAgente.getEscenario().setMatriz(matrizActualizada);
-
-            // Actualización del estado del ambiente
-            estadoAmbiente.setPosicionCaperucita(auxiliar.getPosicionFinal());
-            estadoAmbiente.setCantidadDulcesRecolectados(cantidadDulcesActualizada);
-            estadoAmbiente.getEscenario().setMatriz(matrizActualizada);
-            return estadoAmbiente;
-        }
-
-        return null;
+        return obtenerEstadoAcualizado(auxiliar, estadoAmbiente, estadoAgente);
     }
 
     @Override

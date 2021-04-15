@@ -1,15 +1,14 @@
 package busqueda;
 
-import acciones.IrAbajo;
-import acciones.IrArriba;
-import acciones.IrDerecha;
-import acciones.IrIzquierda;
+import acciones.*;
+import dominio.Escenario;
 import frsf.cidisi.faia.agent.Action;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.Problem;
 import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgent;
 import frsf.cidisi.faia.solver.search.BreathFirstSearch;
+import frsf.cidisi.faia.solver.search.DepthFirstSearch;
 import frsf.cidisi.faia.solver.search.Search;
 
 import java.util.Vector;
@@ -18,7 +17,7 @@ import java.util.logging.Logger;
 
 public class Agente extends SearchBasedAgent {
 
-    public Agente(char[][] escenario) {
+    public Agente(Escenario escenario) {
 
         // Objetivo del agente.
         ObjetivoAgente objetivoAgente = new ObjetivoAgente();
@@ -30,9 +29,14 @@ public class Agente extends SearchBasedAgent {
         // Operadores.
         Vector<SearchAction> operadores = new Vector<SearchAction>();
         operadores.addElement(new IrArriba());
-        operadores.addElement(new IrDerecha());
+        operadores.addElement(new IrArribaPerderVida());
         operadores.addElement(new IrAbajo());
+        operadores.addElement(new IrAbajoPerderVida());
+        operadores.addElement(new IrDerecha());
+        operadores.addElement(new IrDerechaPerderVida());
         operadores.addElement(new IrIzquierda());
+        operadores.addElement(new IrIzquierdaPerderVida());
+
 
         Problem problema = new Problem(objetivoAgente, estadoAgente, operadores);
         this.setProblem(problema);

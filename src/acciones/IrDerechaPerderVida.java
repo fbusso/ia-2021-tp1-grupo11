@@ -1,6 +1,7 @@
 package acciones;
 
 import auxiliar.AuxiliarIrArriba;
+import auxiliar.AuxiliarIrDerecha;
 import busqueda.EstadoAmbiente;
 import busqueda.EstadoCaperucita;
 import dominio.Posicion;
@@ -8,7 +9,7 @@ import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 
-public class IrArriba extends Movimiento {
+public class IrDerechaPerderVida extends PerderVida {
 
     /**
      * Actualiza un nodo del árbol de búsqueda mientras se ejecuta el algoritmo.
@@ -19,7 +20,7 @@ public class IrArriba extends Movimiento {
         EstadoCaperucita estado = (EstadoCaperucita) s;
         char[][] matriz = estado.getEscenario().getMatriz();
         Posicion posicionActual = estado.getPosicion();
-        AuxiliarIrArriba auxiliar = new AuxiliarIrArriba(matriz, posicionActual);
+        AuxiliarIrDerecha auxiliar = new AuxiliarIrDerecha(matriz, posicionActual);
         return obtenerEstadoActualizado(auxiliar, estado);
     }
 
@@ -33,7 +34,7 @@ public class IrArriba extends Movimiento {
 
         char[][] matriz = estadoAgente.getEscenario().getMatriz();
         Posicion posicionActual = estadoAgente.getPosicion();
-        AuxiliarIrArriba auxiliar = new AuxiliarIrArriba(matriz, posicionActual);
+        AuxiliarIrDerecha auxiliar = new AuxiliarIrDerecha(matriz, posicionActual);
         return obtenerEstadoAcualizado(auxiliar, estadoAmbiente, estadoAgente);
     }
 
@@ -47,6 +48,6 @@ public class IrArriba extends Movimiento {
      */
     @Override
     public String toString() {
-        return "irArriba";
+        return "irDerechaPerderVida";
     }
 }

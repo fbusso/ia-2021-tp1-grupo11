@@ -9,28 +9,22 @@ public class EstadoAmbiente extends EnvironmentState {
     private Integer cantidadDulcesRecolectados;
     private Integer cantidadTotalDulces;
     private Escenario escenario;
+    private Integer cantidadActualVidas;
     private Posicion posicionCaperucita;
     private Posicion posicionLobo;
 
-    public EstadoAmbiente(char[][] escenario) {
-        this.escenario = new Escenario(escenario);
+    public EstadoAmbiente(Escenario escenario) {
+        this.escenario = escenario;
         this.initState();
     }
 
-    public Escenario getEscenario() {
-        return escenario;
-    }
-
-    public void setEscenario(Escenario escenario) {
-        this.escenario = escenario;
-    }
-
-    public Posicion getPosicionCaperucita() {
-        return posicionCaperucita;
-    }
-
-    public void setPosicionCaperucita(Posicion posicionCaperucita) {
-        this.posicionCaperucita = posicionCaperucita;
+    @Override
+    public void initState() {
+        this.posicionCaperucita = escenario.getPosicionInicialCaperucita();
+        this.posicionLobo = escenario.getPosicionActualLobo();
+        this.cantidadDulcesRecolectados = 0;
+        this.cantidadActualVidas = 100;
+        this.cantidadTotalDulces = escenario.getCantidadDulces();
     }
 
     public Integer getCantidadDulcesRecolectados() {
@@ -49,20 +43,36 @@ public class EstadoAmbiente extends EnvironmentState {
         this.cantidadTotalDulces = cantidadTotalDulces;
     }
 
+    public Escenario getEscenario() {
+        return escenario;
+    }
+
+    public void setEscenario(Escenario escenario) {
+        this.escenario = escenario;
+    }
+
+    public Integer getCantidadActualVidas() {
+        return cantidadActualVidas;
+    }
+
+    public void setCantidadActualVidas(Integer cantidadActualVidas) {
+        this.cantidadActualVidas = cantidadActualVidas;
+    }
+
+    public Posicion getPosicionCaperucita() {
+        return posicionCaperucita;
+    }
+
+    public void setPosicionCaperucita(Posicion posicionCaperucita) {
+        this.posicionCaperucita = posicionCaperucita;
+    }
+
     public Posicion getPosicionLobo() {
         return posicionLobo;
     }
 
     public void setPosicionLobo(Posicion posicionLobo) {
         this.posicionLobo = posicionLobo;
-    }
-
-    @Override
-    public void initState() {
-        this.posicionCaperucita = escenario.getPosicionInicialCaperucita();
-        this.posicionLobo = escenario.getPosicionActualLobo();
-        this.cantidadDulcesRecolectados = 0;
-        this.cantidadTotalDulces = escenario.getCantidadDulces();
     }
 
     @Override
