@@ -6,10 +6,10 @@ import frsf.cidisi.faia.state.EnvironmentState;
 
 public class EstadoAmbiente extends EnvironmentState {
 
+    private Integer cantidadActualVidas;
     private Integer cantidadDulcesRecolectados;
     private Integer cantidadTotalDulces;
     private Escenario escenario;
-    private Integer cantidadActualVidas;
     private Posicion posicionCaperucita;
     private Posicion posicionLobo;
 

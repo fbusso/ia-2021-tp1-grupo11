@@ -1,6 +1,5 @@
 package acciones;
 
-import auxiliar.AuxiliarIrArriba;
 import auxiliar.AuxiliarIrDerecha;
 import busqueda.EstadoAmbiente;
 import busqueda.EstadoCaperucita;
