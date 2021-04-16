@@ -12,11 +12,18 @@ public abstract class Movimiento extends SearchAction {
 
     protected SearchBasedAgentState obtenerEstadoActualizado(AuxiliarMovimiento auxiliar, EstadoCaperucita estado) {
         if (!estado.getPosicion().equals(estado.getEscenario().getPosicionActualLobo())
-                && !estado.getPosicion().equals(auxiliar.getPosicionFinal())
+//                && !estado.getPosicion().equals(auxiliar.getPosicionFinal())
                 && !auxiliar.getLoboEnCamino()) {
             Integer nuevaCantidadDulces = estado.getCantidadActualDulces() + auxiliar.getCantidadDulcesEnCamino();
             estado.setPosicion(auxiliar.getPosicionFinal());
             estado.setCantidadActualDulces(nuevaCantidadDulces);
+
+/*            Escenario nuevoEscenario = Escenario.obtenerEscenarioActualizado(
+                    estado.getEscenario(),
+                    auxiliar.getPosicionFinal(),
+                    auxiliar.getPosicionesDulces());*/
+
+//            estado.setEscenario(nuevoEscenario);
 
             // No se debería modificar el escenario
             // estado.getEscenario().setMatriz(Escenario.removerDulces(matriz, auxiliar.getPosicionesDulces()));

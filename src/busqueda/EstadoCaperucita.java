@@ -76,9 +76,9 @@ public class EstadoCaperucita extends SearchBasedAgentState implements Cloneable
 
     @Override
     public void initState() {
-        this.vidas = 100;
+        this.vidas = 3;
         this.cantidadActualDulces = 0;
-        this.posicion = escenario.getPosicionInicialCaperucita();
+        this.posicion = escenario.getPosicionActualCaperucita();
         this.cantidadTotalDulces = escenario.getCantidadDulces();
     }
 

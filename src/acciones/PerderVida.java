@@ -15,8 +15,10 @@ public abstract class PerderVida extends SearchAction {
 
     protected SearchBasedAgentState obtenerEstadoActualizado(AuxiliarMovimiento auxiliar, EstadoCaperucita estadoAgente) {
         if (estadoAgente.getPosicion().equals(estadoAgente.getEscenario().getPosicionActualLobo()) || auxiliar.getLoboEnCamino()) {
-            estadoAgente.setPosicion(estadoAgente.getEscenario().getPosicionInicialCaperucita());
+            Integer nuevaCantidadDulces = estadoAgente.getCantidadActualDulces() + auxiliar.getCantidadDulcesEnCamino();
+            estadoAgente.setPosicion(auxiliar.getPosicionFinal());
             estadoAgente.setVidas(estadoAgente.getVidas() - 1);
+            estadoAgente.setCantidadActualDulces(nuevaCantidadDulces);
             return estadoAgente;
             // No se debería modificar el escenario
             // estado.getEscenario().setMatriz(Escenario.removerDulces(matriz, auxiliar.getPosicionesDulces()));
@@ -28,19 +30,24 @@ public abstract class PerderVida extends SearchAction {
     protected EnvironmentState obtenerEstadoAcualizado(AuxiliarMovimiento auxiliar, EstadoAmbiente estadoAmbiente, EstadoCaperucita estadoAgente) {
         if (estadoAgente.getPosicion().equals(estadoAgente.getEscenario().getPosicionActualLobo()) || auxiliar.getLoboEnCamino()) {
             // Cálculo del nuevo escenario
-            estadoAgente.setPosicion(estadoAgente.getEscenario().getPosicionInicialCaperucita());
-            estadoAgente.setVidas(estadoAgente.getVidas() - 1);
-
             Escenario nuevoEscenario = Escenario.obtenerEscenarioActualizado(
                     estadoAgente.getEscenario(),
-                    estadoAgente.getPosicion(),
+                    auxiliar.getPosicionFinal(),
                     Collections.<Posicion>emptyList());
+
+            Integer nuevaCantidadDulces = estadoAgente.getCantidadActualDulces() + auxiliar.getCantidadDulcesEnCamino();
+
+            estadoAgente.setEscenario(nuevoEscenario);
+            estadoAgente.setPosicion(auxiliar.getPosicionFinal());
+            estadoAgente.setVidas(estadoAgente.getVidas() - 1);
+            estadoAgente.setCantidadActualDulces(nuevaCantidadDulces);
 
             // Actualización del estado del ambiente
             estadoAmbiente.setEscenario(nuevoEscenario);
-            estadoAmbiente.setPosicionLobo(nuevoEscenario.getPosicionActualLobo());
             estadoAmbiente.setCantidadActualVidas(estadoAgente.getVidas() - 1);
-            estadoAmbiente.setPosicionCaperucita(estadoAgente.getEscenario().getPosicionInicialCaperucita());
+            estadoAmbiente.setPosicionLobo(nuevoEscenario.getPosicionActualLobo());
+            estadoAmbiente.setCantidadDulcesRecolectados(nuevaCantidadDulces);
+            estadoAmbiente.setPosicionCaperucita(nuevoEscenario.getPosicionActualCaperucita());
             return estadoAmbiente;
         } else {
             return null;

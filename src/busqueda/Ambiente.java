@@ -26,8 +26,7 @@ public class Ambiente extends Environment {
     // FIXME
     @Override
     public boolean agentFailed(Action actionReturned) {
-/*        EstadoAmbiente estadoAmbiente = this.getEnvironmentState();
-        return estadoAmbiente.getCantidadActualVidas() == 0;*/
-        return false;
+        EstadoAmbiente estadoAmbiente = this.getEnvironmentState();
+        return estadoAmbiente.getCantidadActualVidas() == 0;
     }
 }
