@@ -61,15 +61,14 @@ public class EstadoCaperucita extends SearchBasedAgentState implements Cloneable
         this.escenario = escenario;
     }
 
-    //TODO revisar este meotodo
     @Override
     public SearchBasedAgentState clone() {
         EstadoCaperucita nuevoEstado = new EstadoCaperucita();
         nuevoEstado.setVidas(this.vidas);
-        nuevoEstado.setEscenario(this.escenario.clone());
+        nuevoEstado.setEscenario(this.escenario);
         nuevoEstado.setCantidadActualDulces(this.cantidadActualDulces);
         nuevoEstado.setCantidadTotalDulces(this.cantidadTotalDulces);
-        nuevoEstado.setPosicion(this.posicion.clone());
+        nuevoEstado.setPosicion(this.posicion);
 
         return nuevoEstado;
     }
@@ -89,15 +88,21 @@ public class EstadoCaperucita extends SearchBasedAgentState implements Cloneable
         this.posicion = percepcion.getEscenario().getPosicionActualCaperucita();
     }
 
+    /**
+     * Dos estados son iguales si se cumplen las siguientes condiciones:
+     * 1. La cantidad de vidas es la misma
+     * 2. La posición es la misma
+     * 3. La cantidad de dulces recolectadas es la misma
+     *
+     * @param estado estado actual de Caperucita.
+     * @return si dos estados son iguales.
+     */
     @Override
     public boolean equals(Object estado) {
-        if (!(estado instanceof EstadoCaperucita)) {
-            return false;
-        } else {
-            return ((EstadoCaperucita) estado).getVidas().equals(this.getVidas()) &&
-                    ((EstadoCaperucita) estado).getPosicion().equals(this.getPosicion()) &&
-                    ((EstadoCaperucita) estado).getCantidadActualDulces().equals(this.getCantidadActualDulces());
-        }
+        return (estado instanceof EstadoCaperucita) &&
+                ((EstadoCaperucita) estado).getVidas().equals(this.getVidas()) &&
+                ((EstadoCaperucita) estado).getPosicion().equals(this.getPosicion()) &&
+                ((EstadoCaperucita) estado).getCantidadActualDulces().equals(this.getCantidadActualDulces());
     }
 
     @Override

@@ -8,6 +8,10 @@ import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 
+/**
+ * Si el lobo está arriba de Caperucita, ella se mueve en línea recta hacia arriba hasta encontrarse con el próximo
+ * obstáculo (árbol), recolectando todos los dulces en el camino y perdiendo una vida.
+ */
 public class IrArribaPerderVida extends PerderVida {
     /**
      * Actualiza un nodo del árbol de búsqueda mientras se ejecuta el algoritmo.

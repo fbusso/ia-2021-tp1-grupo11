@@ -1,7 +1,6 @@
 package acciones;
 
 import auxiliar.AuxiliarIrAbajo;
-import auxiliar.AuxiliarIrArriba;
 import busqueda.EstadoAmbiente;
 import busqueda.EstadoCaperucita;
 import dominio.Posicion;
@@ -9,6 +8,10 @@ import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 
+/**
+ * Si el lobo está abajo de Caperucita, ella se mueve en línea recta hacia abajo hasta encontrarse con el próximo
+ * obstáculo (árbol), recolectando todos los dulces en el camino y perdiendo una vida.
+ */
 public class IrAbajoPerderVida extends PerderVida {
 
     /**
