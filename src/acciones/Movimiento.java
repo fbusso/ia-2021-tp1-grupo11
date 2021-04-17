@@ -12,21 +12,19 @@ public abstract class Movimiento extends SearchAction {
 
     protected SearchBasedAgentState obtenerEstadoActualizado(AuxiliarMovimiento auxiliar, EstadoCaperucita estado) {
         if (!estado.getPosicion().equals(estado.getEscenario().getPosicionActualLobo())
-//                && !estado.getPosicion().equals(auxiliar.getPosicionFinal())
+                && !estado.getPosicion().equals(auxiliar.getPosicionFinal())
                 && !auxiliar.getLoboEnCamino()) {
+
+            Escenario nuevoEscenario = Escenario.obtenerEscenarioActualizado(
+                    estado.getEscenario(),
+                    auxiliar.getPosicionFinal(),
+                    auxiliar.getPosicionesDulces());
+
             Integer nuevaCantidadDulces = estado.getCantidadActualDulces() + auxiliar.getCantidadDulcesEnCamino();
             estado.setPosicion(auxiliar.getPosicionFinal());
             estado.setCantidadActualDulces(nuevaCantidadDulces);
+            estado.setEscenario(nuevoEscenario.clone());
 
-/*            Escenario nuevoEscenario = Escenario.obtenerEscenarioActualizado(
-                    estado.getEscenario(),
-                    auxiliar.getPosicionFinal(),
-                    auxiliar.getPosicionesDulces());*/
-
-//            estado.setEscenario(nuevoEscenario);
-
-            // No se debería modificar el escenario
-            // estado.getEscenario().setMatriz(Escenario.removerDulces(matriz, auxiliar.getPosicionesDulces()));
             return estado;
         } else {
             return null;
@@ -47,7 +45,7 @@ public abstract class Movimiento extends SearchAction {
 
             // Actualización del estado del agente
             estadoAgente.setEscenario(nuevoEscenario);
-            estadoAgente.setPosicion(auxiliar.getPosicionFinal());
+            estadoAgente.setPosicion(nuevoEscenario.getPosicionActualCaperucita());
             estadoAgente.setCantidadActualDulces(nuevaCantidadDulces);
 
             // Actualización del estado del ambiente

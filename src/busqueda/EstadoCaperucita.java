@@ -65,11 +65,10 @@ public class EstadoCaperucita extends SearchBasedAgentState implements Cloneable
     public SearchBasedAgentState clone() {
         EstadoCaperucita nuevoEstado = new EstadoCaperucita();
         nuevoEstado.setVidas(this.vidas);
-        nuevoEstado.setEscenario(this.escenario);
+        nuevoEstado.setEscenario(this.escenario.clone());
         nuevoEstado.setCantidadActualDulces(this.cantidadActualDulces);
         nuevoEstado.setCantidadTotalDulces(this.cantidadTotalDulces);
-        nuevoEstado.setPosicion(this.posicion);
-
+        nuevoEstado.setPosicion(this.posicion.clone());
         return nuevoEstado;
     }
 
@@ -85,7 +84,6 @@ public class EstadoCaperucita extends SearchBasedAgentState implements Cloneable
     public void updateState(Perception p) {
         Percepcion percepcion = (Percepcion) p;
         this.escenario = percepcion.getEscenario();
-        this.posicion = percepcion.getEscenario().getPosicionActualCaperucita();
     }
 
     /**
