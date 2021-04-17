@@ -15,15 +15,18 @@ public abstract class Movimiento extends SearchAction {
                 && !estado.getPosicion().equals(auxiliar.getPosicionFinal())
                 && !auxiliar.getLoboEnCamino()) {
 
+            // Cálculo del nuevo escenario.
             Escenario nuevoEscenario = Escenario.obtenerEscenarioActualizado(
                     estado.getEscenario(),
                     auxiliar.getPosicionFinal(),
                     auxiliar.getPosicionesDulces());
 
             Integer nuevaCantidadDulces = estado.getCantidadActualDulces() + auxiliar.getCantidadDulcesEnCamino();
+
+            // Actualización del estado del agente.
             estado.setPosicion(auxiliar.getPosicionFinal());
             estado.setCantidadActualDulces(nuevaCantidadDulces);
-            estado.setEscenario(nuevoEscenario.clone());
+            estado.setEscenario(nuevoEscenario);
 
             return estado;
         } else {
@@ -35,7 +38,8 @@ public abstract class Movimiento extends SearchAction {
         if (!estadoAgente.getPosicion().equals(estadoAgente.getEscenario().getPosicionActualLobo())
                 && !estadoAgente.getPosicion().equals(auxiliar.getPosicionFinal())
                 && !auxiliar.getLoboEnCamino()) {
-            // Cálculo del nuevo escenario
+
+            // Cálculo del nuevo escenario.
             Escenario nuevoEscenario = Escenario.obtenerEscenarioActualizado(
                     estadoAgente.getEscenario(),
                     auxiliar.getPosicionFinal(),
@@ -43,7 +47,7 @@ public abstract class Movimiento extends SearchAction {
 
             Integer nuevaCantidadDulces = estadoAgente.getCantidadActualDulces() + auxiliar.getCantidadDulcesEnCamino();
 
-            // Actualización del estado del agente
+            // Actualización del estado del agente.
             estadoAgente.setEscenario(nuevoEscenario);
             estadoAgente.setPosicion(nuevoEscenario.getPosicionActualCaperucita());
             estadoAgente.setCantidadActualDulces(nuevaCantidadDulces);

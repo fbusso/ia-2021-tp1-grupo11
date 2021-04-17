@@ -9,8 +9,8 @@ import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 
 /**
- * Si el lobo está a la derecha de Caperucita, ella se mueve en línea recta hacia la derecha hasta encontrarse con
- * el próximo obstáculo (árbol), recolectando todos los dulces en el camino y perdiendo una vida.
+ * Si el lobo está a la derecha de Caperucita, ella regresa a la posición inicial perdiendo una vida.
+ * Los dulces recolectados vuelven a sus posiciones originales.
  */
 public class IrDerechaPerderVida extends PerderVida {
 

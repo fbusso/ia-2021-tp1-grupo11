@@ -23,7 +23,6 @@ public class Ambiente extends Environment {
         return percepcion;
     }
 
-    // FIXME
     @Override
     public boolean agentFailed(Action actionReturned) {
         EstadoAmbiente estadoAmbiente = this.getEnvironmentState();
