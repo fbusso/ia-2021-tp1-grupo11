@@ -21,6 +21,7 @@ public class IrAbajoPerderVida extends PerderVida {
     @Override
     public SearchBasedAgentState execute(SearchBasedAgentState s) {
         EstadoCaperucita estado = (EstadoCaperucita) s;
+
         char[][] matriz = estado.getEscenario().getMatriz();
         Posicion posicionActual = estado.getPosicion();
         AuxiliarIrAbajo auxiliar = new AuxiliarIrAbajo(matriz, posicionActual);

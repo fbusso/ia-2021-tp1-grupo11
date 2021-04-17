@@ -22,6 +22,7 @@ public class IrIzquierdaPerderVida extends PerderVida {
     public SearchBasedAgentState execute(SearchBasedAgentState s) {
         EstadoCaperucita estado = (EstadoCaperucita) s;
         char[][] matriz = estado.getEscenario().getMatriz();
+
         Posicion posicionActual = estado.getPosicion();
         AuxiliarIrIzquierda auxiliar = new AuxiliarIrIzquierda(matriz, posicionActual);
         return obtenerEstadoActualizado(auxiliar, estado);

@@ -21,6 +21,7 @@ public class IrIzquierda extends Movimiento {
     @Override
     public SearchBasedAgentState execute(SearchBasedAgentState s) {
         EstadoCaperucita estadoAgente = (EstadoCaperucita) s;
+
         char[][] matriz = estadoAgente.getEscenario().getMatriz();
         Posicion posicionActual = estadoAgente.getPosicion();
         AuxiliarIrIzquierda auxiliar = new AuxiliarIrIzquierda(matriz, posicionActual);

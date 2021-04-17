@@ -10,7 +10,7 @@ import frsf.cidisi.faia.state.EnvironmentState;
 
 /**
  * Si el lobo está arriba de Caperucita, ella regresa a la posición inicial perdiendo una vida.
- *  * Los dulces recolectados vuelven a sus posiciones originales.
+ * Los dulces recolectados vuelven a sus posiciones originales.
  */
 public class IrArribaPerderVida extends PerderVida {
     /**
@@ -20,6 +20,7 @@ public class IrArribaPerderVida extends PerderVida {
     @Override
     public SearchBasedAgentState execute(SearchBasedAgentState s) {
         EstadoCaperucita estado = (EstadoCaperucita) s;
+
         char[][] matriz = estado.getEscenario().getMatriz();
         Posicion posicionActual = estado.getPosicion();
         AuxiliarIrArriba auxiliar = new AuxiliarIrArriba(matriz, posicionActual);

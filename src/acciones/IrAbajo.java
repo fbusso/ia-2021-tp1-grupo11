@@ -21,6 +21,7 @@ public class IrAbajo extends Movimiento {
     @Override
     public SearchBasedAgentState execute(SearchBasedAgentState s) {
         EstadoCaperucita estadoAgente = (EstadoCaperucita) s;
+
         char[][] matriz = estadoAgente.getEscenario().getMatriz();
         Posicion posicionActual = estadoAgente.getPosicion();
         AuxiliarIrAbajo auxiliar = new AuxiliarIrAbajo(matriz, posicionActual);
@@ -34,6 +35,7 @@ public class IrAbajo extends Movimiento {
     public EnvironmentState execute(AgentState agentState, EnvironmentState environmentState) {
         EstadoAmbiente estadoAmbiente = (EstadoAmbiente) environmentState;
         EstadoCaperucita estadoAgente = (EstadoCaperucita) agentState;
+
         char[][] matriz = estadoAgente.getEscenario().getMatriz();
         Posicion posicionActual = estadoAgente.getPosicion();
         AuxiliarIrAbajo auxiliar = new AuxiliarIrAbajo(matriz, posicionActual);
