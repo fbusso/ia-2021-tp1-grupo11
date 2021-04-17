@@ -1,6 +1,6 @@
 package acciones;
 
-import auxiliar.AuxiliarIrArriba;
+import auxiliar.AuxiliarIrDerecha;
 import busqueda.EstadoAmbiente;
 import busqueda.EstadoCaperucita;
 import dominio.Posicion;
@@ -9,10 +9,10 @@ import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 
 /**
- * Si el lobo no está arriba de Caperucita, ella se mueve en línea recta hacia arriba hasta encontrarse con el próximo
- * obstáculo (árbol), recolectando todos los dulces en el camino.
+ * Si el lobo está a la derecha de Caperucita, ella regresa a la posición inicial perdiendo una vida.
+ * Los dulces recolectados vuelven a sus posiciones originales.
  */
-public class IrArriba extends Movimiento {
+public class IrDerechaPerderVida extends PerderVida {
 
     /**
      * Actualiza un nodo del árbol de búsqueda mientras se ejecuta el algoritmo.
@@ -20,12 +20,12 @@ public class IrArriba extends Movimiento {
      */
     @Override
     public SearchBasedAgentState execute(SearchBasedAgentState s) {
-        EstadoCaperucita estadoAgente = (EstadoCaperucita) s;
+        EstadoCaperucita estado = (EstadoCaperucita) s;
 
-        char[][] matriz = estadoAgente.getEscenario().getMatriz();
-        Posicion posicionActual = estadoAgente.getPosicion();
-        AuxiliarIrArriba auxiliar = new AuxiliarIrArriba(matriz, posicionActual);
-        return obtenerEstadoActualizado(auxiliar, estadoAgente);
+        char[][] matriz = estado.getEscenario().getMatriz();
+        Posicion posicionActual = estado.getPosicion();
+        AuxiliarIrDerecha auxiliar = new AuxiliarIrDerecha(matriz, posicionActual);
+        return obtenerEstadoActualizado(auxiliar, estado);
     }
 
     /**
@@ -38,7 +38,7 @@ public class IrArriba extends Movimiento {
 
         char[][] matriz = estadoAgente.getEscenario().getMatriz();
         Posicion posicionActual = estadoAgente.getPosicion();
-        AuxiliarIrArriba auxiliar = new AuxiliarIrArriba(matriz, posicionActual);
+        AuxiliarIrDerecha auxiliar = new AuxiliarIrDerecha(matriz, posicionActual);
         return obtenerEstadoAcualizado(auxiliar, estadoAmbiente, estadoAgente);
     }
 
@@ -52,6 +52,6 @@ public class IrArriba extends Movimiento {
      */
     @Override
     public String toString() {
-        return "irArriba";
+        return "irDerechaPerderVida";
     }
 }

@@ -3,14 +3,16 @@ package acciones;
 import auxiliar.AuxiliarIrIzquierda;
 import busqueda.EstadoAmbiente;
 import busqueda.EstadoCaperucita;
-import dominio.Escenario;
 import dominio.Posicion;
-import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 
-public class IrIzquierda extends SearchAction {
+/**
+ * Si el lobo no está a la izquierda de Caperucita, ella se mueve en línea recta hacia la izquierda hasta encontrarse
+ * con el próximo obstáculo (árbol), recolectando todos los dulces en el camino.
+ */
+public class IrIzquierda extends Movimiento {
 
     /**
      * Actualiza un nodo del árbol de búsqueda mientras se ejecuta el algoritmo.
@@ -18,22 +20,12 @@ public class IrIzquierda extends SearchAction {
      */
     @Override
     public SearchBasedAgentState execute(SearchBasedAgentState s) {
-        EstadoCaperucita estado = (EstadoCaperucita) s;
-        char[][] matriz = estado.getEscenario().getMatriz();
-        Posicion posicionActual = estado.getPosicion();
+        EstadoCaperucita estadoAgente = (EstadoCaperucita) s;
+
+        char[][] matriz = estadoAgente.getEscenario().getMatriz();
+        Posicion posicionActual = estadoAgente.getPosicion();
         AuxiliarIrIzquierda auxiliar = new AuxiliarIrIzquierda(matriz, posicionActual);
-
-        if (!auxiliar.getLoboEnCamino()) {
-            Integer nuevaCantidadDulces = estado.getCantidadActualDulces() + auxiliar.getCantidadDulcesEnCamino();
-            estado.setPosicion(auxiliar.getPosicionFinal());
-            estado.setCantidadActualDulces(nuevaCantidadDulces);
-
-            // TODO: Revisar por que esto rompe todo
-            // estado.getEscenario().setMatriz(Escenario.removerDulces(matriz, auxiliar.getPosicionesDulces()));
-            return estado;
-        }
-
-        return null;
+        return obtenerEstadoActualizado(auxiliar, estadoAgente);
     }
 
     /**
@@ -47,24 +39,7 @@ public class IrIzquierda extends SearchAction {
         char[][] matriz = estadoAgente.getEscenario().getMatriz();
         Posicion posicionActual = estadoAgente.getPosicion();
         AuxiliarIrIzquierda auxiliar = new AuxiliarIrIzquierda(matriz, posicionActual);
-
-        if (!auxiliar.getLoboEnCamino()) {
-            Integer cantidadDulcesActualizada = estadoAgente.getCantidadActualDulces() + auxiliar.getCantidadDulcesEnCamino();
-            char[][] matrizActualizada = Escenario.removerDulces(matriz, auxiliar.getPosicionesDulces());
-
-            // Actualización del estado del agente
-            estadoAgente.setPosicion(auxiliar.getPosicionFinal());
-            estadoAgente.setCantidadActualDulces(cantidadDulcesActualizada);
-            estadoAgente.getEscenario().setMatriz(matrizActualizada);
-
-            // Actualización del estado del ambiente
-            estadoAmbiente.setPosicionCaperucita(auxiliar.getPosicionFinal());
-            estadoAmbiente.setCantidadDulcesRecolectados(cantidadDulcesActualizada);
-            estadoAmbiente.getEscenario().setMatriz(matrizActualizada);
-            return estadoAmbiente;
-        }
-
-        return null;
+        return obtenerEstadoAcualizado(auxiliar, estadoAmbiente, estadoAgente);
     }
 
     @Override

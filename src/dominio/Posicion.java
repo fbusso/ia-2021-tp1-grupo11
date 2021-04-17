@@ -13,4 +13,8 @@ public class Posicion {
     public Boolean equals(Posicion otraPosicion) {
         return (this.i.equals(otraPosicion.i) && this.j.equals(otraPosicion.j));
     }
+
+    public Posicion clone() {
+        return new Posicion(this.i, this.j);
+    }
 }
