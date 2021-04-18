@@ -11,7 +11,7 @@ public class EstadoAmbiente extends EnvironmentState {
     private Integer cantidadTotalDulces;
     private Escenario escenario;
     private Posicion posicionCaperucita;
-    private Posicion posicionLobo;
+    private Posicion posicionActualLobo;
 
     public EstadoAmbiente(Escenario escenario) {
         this.escenario = escenario;
@@ -21,7 +21,7 @@ public class EstadoAmbiente extends EnvironmentState {
     @Override
     public void initState() {
         this.posicionCaperucita = escenario.getPosicionActualCaperucita();
-        this.posicionLobo = escenario.getPosicionActualLobo();
+        this.posicionActualLobo = escenario.getPosicionActualLobo();
         this.cantidadDulcesRecolectados = 0;
         this.cantidadActualVidas = 3;
         this.cantidadTotalDulces = escenario.getCantidadDulces();
@@ -67,19 +67,19 @@ public class EstadoAmbiente extends EnvironmentState {
         this.posicionCaperucita = posicionCaperucita;
     }
 
-    public Posicion getPosicionLobo() {
-        return posicionLobo;
+    public Posicion getPosicionActualLobo() {
+        return posicionActualLobo;
     }
 
-    public void setPosicionLobo(Posicion posicionLobo) {
-        this.posicionLobo = posicionLobo;
+    public void setPosicionActualLobo(Posicion posicionActualLobo) {
+        this.posicionActualLobo = posicionActualLobo;
     }
 
     @Override
     public String toString() {
         return "\n" +
                 "- Posición actual de Caperucita: Fila " + posicionCaperucita.i + ", Columna " + posicionCaperucita.j + "\n" +
-                "- Posición actual del Lobo: Fila " + posicionLobo.i + ", Columna " + posicionLobo.j + "\n" +
+                "- Posición actual del Lobo: Fila " + posicionActualLobo.i + ", Columna " + posicionActualLobo.j + "\n" +
                 "- Cantidad de dulces a recolectar restantes: " + (cantidadTotalDulces - cantidadDulcesRecolectados);
     }
 }

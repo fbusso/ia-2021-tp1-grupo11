@@ -55,7 +55,7 @@ public abstract class Movimiento extends SearchAction {
             // Actualización del estado del ambiente
             estadoAmbiente.setEscenario(nuevoEscenario);
             estadoAmbiente.setPosicionCaperucita(nuevoEscenario.getPosicionActualCaperucita());
-            estadoAmbiente.setPosicionLobo(nuevoEscenario.getPosicionActualLobo());
+            estadoAmbiente.setPosicionActualLobo(nuevoEscenario.getPosicionActualLobo());
             estadoAmbiente.setCantidadDulcesRecolectados(nuevaCantidadDulces);
 
             return estadoAmbiente;

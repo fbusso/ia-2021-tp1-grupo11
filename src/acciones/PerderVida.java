@@ -39,7 +39,7 @@ public abstract class PerderVida extends SearchAction {
 
             // Actualización del estado del ambiente.
             estadoAmbiente.setEscenario(nuevoEscenario);
-            estadoAmbiente.setPosicionLobo(nuevoEscenario.getPosicionActualLobo());
+            estadoAmbiente.setPosicionActualLobo(nuevoEscenario.getPosicionActualLobo());
             estadoAmbiente.setPosicionCaperucita(nuevoEscenario.getPosicionActualCaperucita());
             estadoAmbiente.setCantidadActualVidas(estadoAgente.getVidas() - 1);
             estadoAmbiente.setCantidadDulcesRecolectados(0);
