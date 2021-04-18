@@ -25,18 +25,19 @@ public class Agente extends SearchBasedAgent {
         EstadoCaperucita estadoAgente = new EstadoCaperucita(escenario);
         this.setAgentState(estadoAgente);
 
-        // Operadores.
-        Vector<SearchAction> operadores = new Vector<SearchAction>();
+        Vector<SearchAction> operadores = new Vector<>();
+
+        // Operadores relacionados a los movimientos normales.
         operadores.addElement(new IrArriba());
         operadores.addElement(new IrAbajo());
         operadores.addElement(new IrDerecha());
         operadores.addElement(new IrIzquierda());
 
+        // Operadores relacionados a perder vidas.
         operadores.addElement(new IrArribaPerderVida());
         operadores.addElement(new IrAbajoPerderVida());
         operadores.addElement(new IrDerechaPerderVida());
         operadores.addElement(new IrIzquierdaPerderVida());
-
 
         Problem problema = new Problem(objetivoAgente, estadoAgente, operadores);
         this.setProblem(problema);
