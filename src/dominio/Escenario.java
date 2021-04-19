@@ -57,7 +57,7 @@ public class Escenario {
         // Se actualiza la posición actual de Caperucita.
         nuevoEscenario.posicionActualCaperucita = posicionFinal;
         // Se actualiza la celda correspondiente a la nueva posición de Caperucita.
-        nuevoEscenario.matriz[escenario.posicionActualCaperucita.i][escenario.posicionActualCaperucita.j] = 'C';
+        nuevoEscenario.matriz[posicionFinal.i][posicionFinal.j] = 'C';
 
         // Se reemplaza la posición actual del lobo por una celda vacía.
         nuevoEscenario.matriz[nuevoEscenario.posicionActualLobo.i][nuevoEscenario.posicionActualLobo.j] = ' ';
