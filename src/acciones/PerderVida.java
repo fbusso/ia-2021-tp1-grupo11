@@ -13,7 +13,7 @@ public abstract class PerderVida extends SearchAction {
     protected SearchBasedAgentState obtenerEstadoActualizado(AuxiliarMovimiento auxiliar, EstadoCaperucita estadoAgente) {
         if (estadoAgente.getPosicion().equals(estadoAgente.getEscenario().getPosicionActualLobo()) || auxiliar.getLoboEnCamino()) {
             // Cálculo del nuevo escenario.
-            Escenario nuevoEscenario = Escenario.obtenerEscenarioReiniciado(estadoAgente.getEscenario());
+            Escenario nuevoEscenario = Escenario.obtenerEscenarioReiniciado(estadoAgente.getEscenario(), false);
 
             // Actualización del estado del agente.
             estadoAgente.setEscenario(nuevoEscenario);
@@ -29,7 +29,7 @@ public abstract class PerderVida extends SearchAction {
     protected EnvironmentState obtenerEstadoAcualizado(AuxiliarMovimiento auxiliar, EstadoAmbiente estadoAmbiente, EstadoCaperucita estadoAgente) {
         if (estadoAgente.getPosicion().equals(estadoAgente.getEscenario().getPosicionActualLobo()) || auxiliar.getLoboEnCamino()) {
             // Cálculo del nuevo escenario.
-            Escenario nuevoEscenario = Escenario.obtenerEscenarioReiniciado(estadoAgente.getEscenario());
+            Escenario nuevoEscenario = Escenario.obtenerEscenarioReiniciado(estadoAgente.getEscenario(), true);
 
             // Actualización del estado del agente.
             estadoAgente.setEscenario(nuevoEscenario);

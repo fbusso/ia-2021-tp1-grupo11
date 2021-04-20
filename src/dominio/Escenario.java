@@ -40,7 +40,7 @@ public class Escenario {
      * @param posicionFinal posición final de caperucita en el escenario nuevo
      * @return escenario copiado
      */
-    private static Escenario copiar(Escenario escenario, Posicion posicionFinal) {
+    private static Escenario copiar(Escenario escenario, Posicion posicionFinal, Boolean moverLobo) {
         Escenario nuevoEscenario = new Escenario();
 
         // Pasaje de atributos básicos.
@@ -66,7 +66,7 @@ public class Escenario {
         nuevoEscenario.posicionesPosiblesLobo.add(new Posicion(escenario.posicionActualLobo.i, escenario.posicionActualLobo.j));
 
         // Se elige la primer posición posible de la lista de posiciones mezclada.
-        if (!nuevoEscenario.posicionesPosiblesLobo.isEmpty()) {
+        if (!nuevoEscenario.posicionesPosiblesLobo.isEmpty() && moverLobo) {
             Posicion nuevaPosicionLobo = nuevoEscenario.posicionesPosiblesLobo.remove(0);
             nuevoEscenario.matriz[nuevaPosicionLobo.i][nuevaPosicionLobo.j] = 'L';
             nuevoEscenario.posicionActualLobo = nuevaPosicionLobo;
@@ -84,11 +84,12 @@ public class Escenario {
      */
     public static Escenario obtenerEscenarioActualizado(Escenario escenario, Posicion nuevaPosicionCaperucita, List<Posicion> posicionesDulces) {
         // Obtiene el escenario base a copiar.
-        Escenario nuevoEscenario = Escenario.copiar(escenario, nuevaPosicionCaperucita);
+        Escenario nuevoEscenario = Escenario.copiar(escenario, nuevaPosicionCaperucita, true);
 
         // Elimina los dulces recolectados en el nuevo escenario.
         for (Posicion posicion : posicionesDulces) {
-            nuevoEscenario.matriz[posicion.i][posicion.j] = ' ';
+            char celda = nuevoEscenario.matriz[posicion.i][posicion.j];
+            if (celda == 'D') nuevoEscenario.matriz[posicion.i][posicion.j] = ' ';
         }
 
         return nuevoEscenario;
@@ -100,9 +101,9 @@ public class Escenario {
      * @param escenario escenario original desde el que se parte para obtener el escenario nuevo.
      * @return escenario reiniciado (Caperucita en la posición inicial y dulces restaurados).
      */
-    public static Escenario obtenerEscenarioReiniciado(Escenario escenario) {
+    public static Escenario obtenerEscenarioReiniciado(Escenario escenario, Boolean moverLobo) {
         // Obtiene el escenario base a copiar.
-        Escenario nuevoEscenario = Escenario.copiar(escenario, escenario.posicionInicialCaperucita);
+        Escenario nuevoEscenario = Escenario.copiar(escenario, escenario.posicionInicialCaperucita, moverLobo);
 
         // Restaura los dulces en el nuevo escenario.
         for (Posicion posicion : nuevoEscenario.posicionesDulces) {
