@@ -1,9 +1,9 @@
 package acciones;
 
-import auxiliar.DecrementarPosicion;
+import auxiliar.Avanzar;
 import auxiliar.EvaluarPosicion;
-import auxiliar.IncrementarPosicion;
 import auxiliar.Movimiento;
+import auxiliar.Retroceder;
 import busqueda.EstadoAmbiente;
 import busqueda.EstadoCaperucita;
 import dominio.Posicion;
@@ -17,13 +17,13 @@ import frsf.cidisi.faia.state.EnvironmentState;
  */
 public class IrArribaPerderVida extends AccionPerderVida {
 
-    private final DecrementarPosicion decrementarPosicion;
+    private final Retroceder retroceder;
     private final EvaluarPosicion evaluarPosicion;
-    private final IncrementarPosicion incrementarPosicion;
+    private final Avanzar avanzar;
 
     public IrArribaPerderVida() {
-        this.incrementarPosicion = (posicion -> posicion.i--);
-        this.decrementarPosicion = (posicion -> posicion.i++);
+        this.avanzar = (posicion -> posicion.i--);
+        this.retroceder = (posicion -> posicion.i++);
         this.evaluarPosicion = (posicion, matriz) -> posicion.i >= 0 && matriz[posicion.i][posicion.j] != 'A';
     }
 
@@ -37,7 +37,7 @@ public class IrArribaPerderVida extends AccionPerderVida {
 
         char[][] matriz = estado.getEscenario().getMatriz();
         Posicion posicionActual = estado.getPosicion();
-        Movimiento movimientoSiguiente = new Movimiento(posicionActual, matriz, incrementarPosicion, decrementarPosicion, evaluarPosicion);
+        Movimiento movimientoSiguiente = new Movimiento(posicionActual, matriz, avanzar, retroceder, evaluarPosicion);
         return obtenerEstadoActualizado(movimientoSiguiente, estado);
     }
 
@@ -51,7 +51,7 @@ public class IrArribaPerderVida extends AccionPerderVida {
 
         char[][] matriz = estadoAgente.getEscenario().getMatriz();
         Posicion posicionActual = estadoAgente.getPosicion();
-        Movimiento auxiliar = new Movimiento(posicionActual, matriz, incrementarPosicion, decrementarPosicion, evaluarPosicion);
+        Movimiento auxiliar = new Movimiento(posicionActual, matriz, avanzar, retroceder, evaluarPosicion);
         return obtenerEstadoAcualizado(auxiliar, estadoAmbiente, estadoAgente);
     }
 

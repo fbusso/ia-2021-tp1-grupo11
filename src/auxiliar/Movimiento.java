@@ -13,15 +13,15 @@ public class Movimiento {
 
     public Movimiento(Posicion posicion,
                       char[][] matriz,
-                      IncrementarPosicion incrementarPosicion,
-                      DecrementarPosicion decrementarPosicion,
+                      Avanzar avanzar,
+                      Retroceder retroceder,
                       EvaluarPosicion evaluarPosicion) {
 
         this.posicionesDulces = new ArrayList<>();
         this.loboEnCamino = false;
 
         Posicion nuevaPosicion = posicion.clone();
-        incrementarPosicion.ejecutar(nuevaPosicion);
+        avanzar.ejecutar(nuevaPosicion);
 
         while (evaluarPosicion.ejecutar(nuevaPosicion, matriz)) {
             if (matriz[nuevaPosicion.i][nuevaPosicion.j] == 'D') {
@@ -29,10 +29,10 @@ public class Movimiento {
             } else if (matriz[nuevaPosicion.i][nuevaPosicion.j] == 'L') {
                 this.loboEnCamino = true;
             }
-            incrementarPosicion.ejecutar(nuevaPosicion);
+            avanzar.ejecutar(nuevaPosicion);
         }
 
-        decrementarPosicion.ejecutar(nuevaPosicion);
+        retroceder.ejecutar(nuevaPosicion);
         this.posicionFinal = nuevaPosicion.clone();
         this.cantidadDulcesEnCamino = posicionesDulces.size();
     }

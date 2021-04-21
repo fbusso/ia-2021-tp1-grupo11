@@ -2,6 +2,6 @@ package auxiliar;
 
 import dominio.Posicion;
 
-public interface IncrementarPosicion {
+public interface Avanzar {
     void ejecutar(Posicion posicion);
 }

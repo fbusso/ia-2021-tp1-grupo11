@@ -1,9 +1,9 @@
 package acciones;
 
-import auxiliar.DecrementarPosicion;
+import auxiliar.Avanzar;
 import auxiliar.EvaluarPosicion;
-import auxiliar.IncrementarPosicion;
 import auxiliar.Movimiento;
+import auxiliar.Retroceder;
 import busqueda.EstadoAmbiente;
 import busqueda.EstadoCaperucita;
 import dominio.Posicion;
@@ -17,13 +17,13 @@ import frsf.cidisi.faia.state.EnvironmentState;
  */
 public class IrDerecha extends AccionMovimiento {
 
-    private final DecrementarPosicion decrementarPosicion;
+    private final Retroceder retroceder;
     private final EvaluarPosicion evaluarPosicion;
-    private final IncrementarPosicion incrementarPosicion;
+    private final Avanzar avanzar;
 
     public IrDerecha() {
-        this.incrementarPosicion = (posicion -> posicion.j++);
-        this.decrementarPosicion = (posicion -> posicion.j--);
+        this.avanzar = (posicion -> posicion.j++);
+        this.retroceder = (posicion -> posicion.j--);
         this.evaluarPosicion = (posicion, matriz) -> posicion.j <= matriz[0].length && matriz[posicion.i][posicion.j] != 'A';
     }
 
@@ -37,7 +37,7 @@ public class IrDerecha extends AccionMovimiento {
 
         char[][] matriz = estadoAgente.getEscenario().getMatriz();
         Posicion posicionActual = estadoAgente.getPosicion();
-        Movimiento movimientoSiguiente = new Movimiento(posicionActual, matriz, incrementarPosicion, decrementarPosicion, evaluarPosicion);
+        Movimiento movimientoSiguiente = new Movimiento(posicionActual, matriz, avanzar, retroceder, evaluarPosicion);
         return obtenerEstadoActualizado(movimientoSiguiente, estadoAgente);
     }
 
@@ -51,7 +51,7 @@ public class IrDerecha extends AccionMovimiento {
 
         char[][] matriz = estadoAgente.getEscenario().getMatriz();
         Posicion posicionActual = estadoAgente.getPosicion();
-        Movimiento movimientoSiguiente = new Movimiento(posicionActual, matriz, incrementarPosicion, decrementarPosicion, evaluarPosicion);
+        Movimiento movimientoSiguiente = new Movimiento(posicionActual, matriz, avanzar, retroceder, evaluarPosicion);
         return obtenerEstadoAcualizado(movimientoSiguiente, estadoAmbiente, estadoAgente);
     }
 
