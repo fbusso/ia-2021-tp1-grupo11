@@ -1,6 +1,9 @@
 package acciones;
 
-import auxiliar.AuxiliarIrArriba;
+import auxiliar.DecrementarPosicion;
+import auxiliar.EvaluarPosicion;
+import auxiliar.IncrementarPosicion;
+import auxiliar.Movimiento;
 import busqueda.EstadoAmbiente;
 import busqueda.EstadoCaperucita;
 import dominio.Posicion;
@@ -12,7 +15,17 @@ import frsf.cidisi.faia.state.EnvironmentState;
  * Si el lobo no está arriba de Caperucita, ella se mueve en línea recta hacia arriba hasta encontrarse con el próximo
  * obstáculo (árbol), recolectando todos los dulces en el camino.
  */
-public class IrArriba extends Movimiento {
+public class IrArriba extends AccionMovimiento {
+
+    private final DecrementarPosicion decrementarPosicion;
+    private final EvaluarPosicion evaluarPosicion;
+    private final IncrementarPosicion incrementarPosicion;
+
+    public IrArriba() {
+        this.incrementarPosicion = (posicion -> posicion.i--);
+        this.decrementarPosicion = (posicion -> posicion.i++);
+        this.evaluarPosicion = (posicion, matriz) -> posicion.i >= 0 && matriz[posicion.i][posicion.j] != 'A';
+    }
 
     /**
      * Actualiza un nodo del árbol de búsqueda mientras se ejecuta el algoritmo.
@@ -24,8 +37,8 @@ public class IrArriba extends Movimiento {
 
         char[][] matriz = estadoAgente.getEscenario().getMatriz();
         Posicion posicionActual = estadoAgente.getPosicion();
-        AuxiliarIrArriba auxiliar = new AuxiliarIrArriba(matriz, posicionActual);
-        return obtenerEstadoActualizado(auxiliar, estadoAgente);
+        Movimiento movimientoSiguiente = new Movimiento(posicionActual, matriz, incrementarPosicion, decrementarPosicion, evaluarPosicion);
+        return obtenerEstadoActualizado(movimientoSiguiente, estadoAgente);
     }
 
     /**
@@ -38,8 +51,8 @@ public class IrArriba extends Movimiento {
 
         char[][] matriz = estadoAgente.getEscenario().getMatriz();
         Posicion posicionActual = estadoAgente.getPosicion();
-        AuxiliarIrArriba auxiliar = new AuxiliarIrArriba(matriz, posicionActual);
-        return obtenerEstadoAcualizado(auxiliar, estadoAmbiente, estadoAgente);
+        Movimiento movimientoSiguiente = new Movimiento(posicionActual, matriz, incrementarPosicion, decrementarPosicion, evaluarPosicion);
+        return obtenerEstadoAcualizado(movimientoSiguiente, estadoAmbiente, estadoAgente);
     }
 
     @Override

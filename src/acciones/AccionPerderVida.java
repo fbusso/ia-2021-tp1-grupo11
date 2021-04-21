@@ -1,6 +1,6 @@
 package acciones;
 
-import auxiliar.AuxiliarMovimiento;
+import auxiliar.Movimiento;
 import busqueda.EstadoAmbiente;
 import busqueda.EstadoCaperucita;
 import dominio.Escenario;
@@ -8,9 +8,9 @@ import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 
-public abstract class PerderVida extends SearchAction {
+public abstract class AccionPerderVida extends SearchAction {
 
-    protected SearchBasedAgentState obtenerEstadoActualizado(AuxiliarMovimiento auxiliar, EstadoCaperucita estadoAgente) {
+    protected SearchBasedAgentState obtenerEstadoActualizado(Movimiento auxiliar, EstadoCaperucita estadoAgente) {
         if (estadoAgente.getPosicion().equals(estadoAgente.getEscenario().getPosicionActualLobo()) || auxiliar.getLoboEnCamino()) {
             // Cálculo del nuevo escenario.
             Escenario nuevoEscenario = Escenario.obtenerEscenarioReiniciado(estadoAgente.getEscenario(), false);
@@ -26,7 +26,7 @@ public abstract class PerderVida extends SearchAction {
         }
     }
 
-    protected EnvironmentState obtenerEstadoAcualizado(AuxiliarMovimiento auxiliar, EstadoAmbiente estadoAmbiente, EstadoCaperucita estadoAgente) {
+    protected EnvironmentState obtenerEstadoAcualizado(Movimiento auxiliar, EstadoAmbiente estadoAmbiente, EstadoCaperucita estadoAgente) {
         if (estadoAgente.getPosicion().equals(estadoAgente.getEscenario().getPosicionActualLobo()) || auxiliar.getLoboEnCamino()) {
             // Cálculo del nuevo escenario.
             Escenario nuevoEscenario = Escenario.obtenerEscenarioReiniciado(estadoAgente.getEscenario(), true);

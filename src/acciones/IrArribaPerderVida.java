@@ -1,6 +1,9 @@
 package acciones;
 
-import auxiliar.AuxiliarIrArriba;
+import auxiliar.DecrementarPosicion;
+import auxiliar.EvaluarPosicion;
+import auxiliar.IncrementarPosicion;
+import auxiliar.Movimiento;
 import busqueda.EstadoAmbiente;
 import busqueda.EstadoCaperucita;
 import dominio.Posicion;
@@ -12,7 +15,18 @@ import frsf.cidisi.faia.state.EnvironmentState;
  * Si el lobo está arriba de Caperucita, ella regresa a la posición inicial perdiendo una vida.
  * Los dulces recolectados vuelven a sus posiciones originales.
  */
-public class IrArribaPerderVida extends PerderVida {
+public class IrArribaPerderVida extends AccionPerderVida {
+
+    private final DecrementarPosicion decrementarPosicion;
+    private final EvaluarPosicion evaluarPosicion;
+    private final IncrementarPosicion incrementarPosicion;
+
+    public IrArribaPerderVida() {
+        this.incrementarPosicion = (posicion -> posicion.i--);
+        this.decrementarPosicion = (posicion -> posicion.i++);
+        this.evaluarPosicion = (posicion, matriz) -> posicion.i >= 0 && matriz[posicion.i][posicion.j] != 'A';
+    }
+
     /**
      * Actualiza un nodo del árbol de búsqueda mientras se ejecuta el algoritmo.
      * No actualiza el estado del mundo real.
@@ -23,8 +37,8 @@ public class IrArribaPerderVida extends PerderVida {
 
         char[][] matriz = estado.getEscenario().getMatriz();
         Posicion posicionActual = estado.getPosicion();
-        AuxiliarIrArriba auxiliar = new AuxiliarIrArriba(matriz, posicionActual);
-        return obtenerEstadoActualizado(auxiliar, estado);
+        Movimiento movimientoSiguiente = new Movimiento(posicionActual, matriz, incrementarPosicion, decrementarPosicion, evaluarPosicion);
+        return obtenerEstadoActualizado(movimientoSiguiente, estado);
     }
 
     /**
@@ -37,7 +51,7 @@ public class IrArribaPerderVida extends PerderVida {
 
         char[][] matriz = estadoAgente.getEscenario().getMatriz();
         Posicion posicionActual = estadoAgente.getPosicion();
-        AuxiliarIrArriba auxiliar = new AuxiliarIrArriba(matriz, posicionActual);
+        Movimiento auxiliar = new Movimiento(posicionActual, matriz, incrementarPosicion, decrementarPosicion, evaluarPosicion);
         return obtenerEstadoAcualizado(auxiliar, estadoAmbiente, estadoAgente);
     }
 
