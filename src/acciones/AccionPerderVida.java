@@ -4,15 +4,22 @@ import auxiliar.Movimiento;
 import busqueda.EstadoAmbiente;
 import busqueda.EstadoCaperucita;
 import dominio.Escenario;
+import dominio.Posicion;
 import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 
 public abstract class AccionPerderVida extends SearchAction implements ActualizarEstado {
 
+    private Double costo;
+
     @Override
-    public SearchBasedAgentState obtenerEstadoActualizado(Movimiento movimiento, EstadoCaperucita estadoAgente) {
-        if (movimiento.getLoboEnCamino()) {
+    public SearchBasedAgentState obtenerEstadoActualizado(Movimiento movimientoSiguiente, EstadoCaperucita estadoAgente) {
+        if (movimientoSiguiente.getLoboEnCamino()) {
+
+//            estadoAgente.actualizarPosicionesVisitadas(estadoAgente.getPosicion());
+            costo = Posicion.distanciaEntre(movimientoSiguiente.getPosicionFinal(), estadoAgente.getPosicion());
+
             // Cálculo del nuevo escenario.
             Escenario nuevoEscenario = Escenario.obtenerEscenarioReiniciado(estadoAgente.getEscenario(), false);
 
@@ -21,6 +28,7 @@ public abstract class AccionPerderVida extends SearchAction implements Actualiza
             estadoAgente.setPosicion(nuevoEscenario.getPosicionInicialCaperucita());
             estadoAgente.setVidas(estadoAgente.getVidas() - 1);
             estadoAgente.setCantidadActualDulces(0);
+
             return estadoAgente;
         }
 
@@ -28,8 +36,10 @@ public abstract class AccionPerderVida extends SearchAction implements Actualiza
     }
 
     @Override
-    public EnvironmentState obtenerEstadoAcualizado(Movimiento movimiento, EstadoAmbiente estadoAmbiente, EstadoCaperucita estadoAgente) {
-        if (movimiento.getLoboEnCamino()) {
+    public EnvironmentState obtenerEstadoAcualizado(Movimiento movimientoSiguiente, EstadoAmbiente estadoAmbiente, EstadoCaperucita estadoAgente) {
+        if (movimientoSiguiente.getLoboEnCamino()) {
+
+            estadoAgente.actualizarPosicionesVisitadas(estadoAgente.getPosicion());
             // Cálculo del nuevo escenario.
             Escenario nuevoEscenario = Escenario.obtenerEscenarioReiniciado(estadoAgente.getEscenario(), true);
 
@@ -53,6 +63,6 @@ public abstract class AccionPerderVida extends SearchAction implements Actualiza
 
     @Override
     public Double getCost() {
-        return 10.00;
+        return 10 * costo;
     }
 }

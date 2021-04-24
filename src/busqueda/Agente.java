@@ -31,8 +31,8 @@ public class Agente extends SearchBasedAgent {
         Vector<SearchAction> operadores = new Vector<>();
 
         operadores.addElement(new IrArriba());
-        operadores.addElement(new IrDerecha());
         operadores.addElement(new IrAbajo());
+        operadores.addElement(new IrDerecha());
         operadores.addElement(new IrIzquierda());
 
         operadores.addElement(new IrDerechaPerderVida());
@@ -58,7 +58,7 @@ public class Agente extends SearchBasedAgent {
 
         Search busqueda = new Search(estrategia);
 
-        busqueda.setVisibleTree(Search.WHITHOUT_TREE);
+        busqueda.setVisibleTree(Search.PDF_TREE);
 
         this.setSolver(busqueda);
 

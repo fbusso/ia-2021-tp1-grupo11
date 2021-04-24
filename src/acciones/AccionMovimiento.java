@@ -4,31 +4,39 @@ import auxiliar.Movimiento;
 import busqueda.EstadoAmbiente;
 import busqueda.EstadoCaperucita;
 import dominio.Escenario;
+import dominio.Posicion;
 import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 
 public abstract class AccionMovimiento extends SearchAction implements ActualizarEstado {
 
+    private Double costo;
+
     @Override
-    public SearchBasedAgentState obtenerEstadoActualizado(Movimiento movimientoSiguiente, EstadoCaperucita estado) {
-        if (!movimientoSiguiente.getLoboEnCamino()) {
+    public SearchBasedAgentState obtenerEstadoActualizado(Movimiento movimientoSiguiente, EstadoCaperucita estadoAgente) {
+        if (!movimientoSiguiente.getLoboEnCamino()
+                && !estadoAgente.getPosicion().equals(movimientoSiguiente.getPosicionFinal())
+                && estadoAgente.posicionVisitadaVeces(movimientoSiguiente.getPosicionFinal(), 11)) {
+
+            costo = Posicion.distanciaEntre(movimientoSiguiente.getPosicionFinal(), estadoAgente.getPosicion());
+//            estadoAgente.actualizarPosicionesVisitadas(estadoAgente.getPosicion());
 
             // Cálculo del nuevo escenario.
             Escenario nuevoEscenario = Escenario.obtenerEscenarioActualizado(
-                    estado.getEscenario(),
+                    estadoAgente.getEscenario(),
                     movimientoSiguiente.getPosicionFinal(),
                     movimientoSiguiente.getPosicionesDulces(),
                     false);
 
-            Integer nuevaCantidadDulces = estado.getCantidadActualDulces() + movimientoSiguiente.getCantidadDulcesEnCamino();
+            Integer nuevaCantidadDulces = estadoAgente.getCantidadActualDulces() + movimientoSiguiente.getCantidadDulcesEnCamino();
 
             // Actualización del estado del agente.
-            estado.setPosicion(movimientoSiguiente.getPosicionFinal());
-            estado.setCantidadActualDulces(nuevaCantidadDulces);
-            estado.setEscenario(nuevoEscenario);
+            estadoAgente.setPosicion(movimientoSiguiente.getPosicionFinal());
+            estadoAgente.setCantidadActualDulces(nuevaCantidadDulces);
+            estadoAgente.setEscenario(nuevoEscenario);
 
-            return estado;
+            return estadoAgente;
         }
 
         return null;
@@ -36,7 +44,11 @@ public abstract class AccionMovimiento extends SearchAction implements Actualiza
 
     @Override
     public EnvironmentState obtenerEstadoAcualizado(Movimiento movimientoSiguiente, EstadoAmbiente estadoAmbiente, EstadoCaperucita estadoAgente) {
-        if (!movimientoSiguiente.getLoboEnCamino()) {
+        if (!movimientoSiguiente.getLoboEnCamino()
+                && !estadoAgente.getPosicion().equals(movimientoSiguiente.getPosicionFinal())
+                && estadoAgente.posicionVisitadaVeces(movimientoSiguiente.getPosicionFinal(), 11)) {
+
+            estadoAgente.actualizarPosicionesVisitadas(estadoAgente.getPosicion());
 
             // Cálculo del nuevo escenario.
             Escenario nuevoEscenario = Escenario.obtenerEscenarioActualizado(
@@ -66,6 +78,6 @@ public abstract class AccionMovimiento extends SearchAction implements Actualiza
 
     @Override
     public Double getCost() {
-        return 1.00;
+        return costo;
     }
 }
