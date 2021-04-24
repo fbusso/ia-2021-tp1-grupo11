@@ -53,11 +53,11 @@ public class Escenario {
         nuevoEscenario.posicionesDulces = escenario.posicionesDulces;
 
         // Se reemplaza la posición actual de Caperucita por una celda vacía.
-        nuevoEscenario.matriz[escenario.posicionActualCaperucita.i][escenario.posicionActualCaperucita.j] = ' ';
+        nuevoEscenario.insertar(' ', escenario.posicionActualCaperucita);
         // Se actualiza la posición actual de Caperucita.
         nuevoEscenario.posicionActualCaperucita = nuevaPosicionCaperucita;
         // Se actualiza la celda correspondiente a la nueva posición de Caperucita.
-        nuevoEscenario.matriz[nuevaPosicionCaperucita.i][nuevaPosicionCaperucita.j] = 'C';
+        nuevoEscenario.insertar('C', nuevaPosicionCaperucita);
 
         return nuevoEscenario;
     }
@@ -79,7 +79,7 @@ public class Escenario {
         // Elimina los dulces recolectados en el nuevo escenario.
         for (Posicion posicion : posicionesDulces) {
             char celda = nuevoEscenario.matriz[posicion.i][posicion.j];
-            if (celda == 'D') nuevoEscenario.matriz[posicion.i][posicion.j] = ' ';
+            if (celda == 'D') nuevoEscenario.insertar(' ', posicion);
         }
 
         if (!esEtapaBusqueda) {
