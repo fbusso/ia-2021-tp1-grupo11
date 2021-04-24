@@ -36,11 +36,11 @@ public class Escenario {
      * - Reemplazar la posición actual del lobo con un espacio en blanco.
      * - Colocar un caracter 'L' en una nueva posición de la lista de posiciones posibles.
      *
-     * @param escenario     escenario a copiar
-     * @param posicionFinal posición final de caperucita en el escenario nuevo
+     * @param escenario               escenario a copiar
+     * @param nuevaPosicionCaperucita posición final de caperucita en el escenario nuevo
      * @return escenario copiado
      */
-    private static Escenario copiar(Escenario escenario, Posicion posicionFinal, Boolean moverLobo) {
+    private static Escenario copiar(Escenario escenario, Posicion nuevaPosicionCaperucita, Boolean moverLobo) {
         Escenario nuevoEscenario = new Escenario();
 
         // Pasaje de atributos básicos.
@@ -55,9 +55,9 @@ public class Escenario {
         // Se reemplaza la posición actual de Caperucita por una celda vacía.
         nuevoEscenario.matriz[escenario.posicionActualCaperucita.i][escenario.posicionActualCaperucita.j] = ' ';
         // Se actualiza la posición actual de Caperucita.
-        nuevoEscenario.posicionActualCaperucita = posicionFinal;
+        nuevoEscenario.posicionActualCaperucita = nuevaPosicionCaperucita;
         // Se actualiza la celda correspondiente a la nueva posición de Caperucita.
-        nuevoEscenario.matriz[posicionFinal.i][posicionFinal.j] = 'C';
+        nuevoEscenario.matriz[nuevaPosicionCaperucita.i][nuevaPosicionCaperucita.j] = 'C';
 
         // Se reemplaza la posición actual del lobo por una celda vacía.
         nuevoEscenario.matriz[nuevoEscenario.posicionActualLobo.i][nuevoEscenario.posicionActualLobo.j] = ' ';
@@ -67,7 +67,13 @@ public class Escenario {
 
         // Se elige la primer posición posible de la lista de posiciones mezclada.
         if (!nuevoEscenario.posicionesPosiblesLobo.isEmpty() && moverLobo) {
+
+            // No se admite que el lobo se posiciones sobre Caperucita.
             Posicion nuevaPosicionLobo = nuevoEscenario.posicionesPosiblesLobo.remove(0);
+            while (nuevaPosicionLobo.equals(nuevaPosicionCaperucita)) {
+                nuevaPosicionLobo = nuevoEscenario.posicionesPosiblesLobo.remove(0);
+            }
+
             nuevoEscenario.matriz[nuevaPosicionLobo.i][nuevaPosicionLobo.j] = 'L';
             nuevoEscenario.posicionActualLobo = nuevaPosicionLobo;
         }
@@ -212,6 +218,27 @@ public class Escenario {
 
     public Posicion getPosicionActualLobo() {
         return posicionActualLobo;
+    }
+
+    public Posicion getPosicionInicialCaperucita() {
+        return posicionInicialCaperucita;
+    }
+
+    public void setPosicionInicialCaperucita(Posicion posicionInicialCaperucita) {
+        this.posicionInicialCaperucita = posicionInicialCaperucita;
+    }
+
+    public boolean equals(Escenario otroEscenario) {
+
+        for (int i = 0; i < this.matriz.length; i++) {
+            for (int j = 0; j < matriz[0].length; j++) {
+                if (this.matriz[i][j] != otroEscenario.matriz[i][j]) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     @Override

@@ -8,8 +8,11 @@ import frsf.cidisi.faia.agent.search.Problem;
 import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgent;
 import frsf.cidisi.faia.solver.search.BreathFirstSearch;
+import frsf.cidisi.faia.solver.search.DepthFirstSearch;
 import frsf.cidisi.faia.solver.search.Search;
+import frsf.cidisi.faia.solver.search.UniformCostSearch;
 
+import java.util.Collections;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,16 +30,14 @@ public class Agente extends SearchBasedAgent {
 
         Vector<SearchAction> operadores = new Vector<>();
 
-        // Operadores relacionados a los movimientos normales.
         operadores.addElement(new IrArriba());
-        operadores.addElement(new IrAbajo());
         operadores.addElement(new IrDerecha());
+        operadores.addElement(new IrAbajo());
         operadores.addElement(new IrIzquierda());
 
-        // Operadores relacionados a perder vidas.
+        operadores.addElement(new IrDerechaPerderVida());
         operadores.addElement(new IrArribaPerderVida());
         operadores.addElement(new IrAbajoPerderVida());
-        operadores.addElement(new IrDerechaPerderVida());
         operadores.addElement(new IrIzquierdaPerderVida());
 
         Problem problema = new Problem(objetivoAgente, estadoAgente, operadores);
@@ -45,19 +46,19 @@ public class Agente extends SearchBasedAgent {
 
     @Override
     public Action selectAction() {
-        /*
-           Se crea la estrategia de búsqueda:
-           Se usa una Búsqueda en Anchura (Breathe First Search).
-           Alternativamente se podría usar una búsqueda en Profundidad (Depth First Search).
 
-           Para utilizar la búsqueda en profundidad, se cambia la siguiente línea por:
-           DepthFirstSearch estrategia = new DepthFirstSearch();
-         */
-        BreathFirstSearch estrategia = new BreathFirstSearch();
+        // Búsqueda en Primero en Amplitud (Breathe First Search).
+//         BreathFirstSearch estrategia = new BreathFirstSearch();
+//
+        // Estrategia de costo uniforme.
+        // UniformCostSearch estrategia = new UniformCostSearch(new FuncionCosto());
+
+        // Búsqueda en Primero en Profundidad (Depth First Search).
+        DepthFirstSearch estrategia = new DepthFirstSearch();
+
         Search busqueda = new Search(estrategia);
 
-        // Genera un archivo XML del árbol de búsqueda.
-        busqueda.setVisibleTree(Search.EFAIA_TREE);
+        busqueda.setVisibleTree(Search.WHITHOUT_TREE);
 
         this.setSolver(busqueda);
 

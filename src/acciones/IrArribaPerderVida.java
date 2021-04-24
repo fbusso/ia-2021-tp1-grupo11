@@ -55,11 +55,6 @@ public class IrArribaPerderVida extends AccionPerderVida {
         return obtenerEstadoAcualizado(auxiliar, estadoAmbiente, estadoAgente);
     }
 
-    @Override
-    public Double getCost() {
-        return 1.00;
-    }
-
     /**
      * Este método no es importante para un agente basado en búsqueda.
      */

@@ -55,11 +55,6 @@ public class IrArriba extends AccionMovimiento {
         return obtenerEstadoAcualizado(movimientoSiguiente, estadoAmbiente, estadoAgente);
     }
 
-    @Override
-    public Double getCost() {
-        return 1.00;
-    }
-
     /**
      * Este método no es importante para un agente basado en búsqueda.
      */
