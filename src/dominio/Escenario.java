@@ -88,9 +88,9 @@ public class Escenario {
      * @param nuevaPosicionCaperucita posicion de Caperucita luego de realizar el movimiento.
      * @param posicionesDulces        posiciones de los dulces recolectados en el movimiento.
      */
-    public static Escenario obtenerEscenarioActualizado(Escenario escenario, Posicion nuevaPosicionCaperucita, List<Posicion> posicionesDulces) {
+    public static Escenario obtenerEscenarioActualizado(Escenario escenario, Posicion nuevaPosicionCaperucita, List<Posicion> posicionesDulces, Boolean moverLobo) {
         // Obtiene el escenario base a copiar.
-        Escenario nuevoEscenario = Escenario.copiar(escenario, nuevaPosicionCaperucita, true);
+        Escenario nuevoEscenario = Escenario.copiar(escenario, nuevaPosicionCaperucita, moverLobo);
 
         // Elimina los dulces recolectados en el nuevo escenario.
         for (Posicion posicion : posicionesDulces) {

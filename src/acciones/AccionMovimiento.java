@@ -18,7 +18,8 @@ public abstract class AccionMovimiento extends SearchAction implements Actualiza
             Escenario nuevoEscenario = Escenario.obtenerEscenarioActualizado(
                     estado.getEscenario(),
                     movimientoSiguiente.getPosicionFinal(),
-                    movimientoSiguiente.getPosicionesDulces());
+                    movimientoSiguiente.getPosicionesDulces(),
+                    false);
 
             Integer nuevaCantidadDulces = estado.getCantidadActualDulces() + movimientoSiguiente.getCantidadDulcesEnCamino();
 
@@ -41,7 +42,8 @@ public abstract class AccionMovimiento extends SearchAction implements Actualiza
             Escenario nuevoEscenario = Escenario.obtenerEscenarioActualizado(
                     estadoAgente.getEscenario(),
                     movimientoSiguiente.getPosicionFinal(),
-                    movimientoSiguiente.getPosicionesDulces());
+                    movimientoSiguiente.getPosicionesDulces(),
+                    true);
 
             Integer nuevaCantidadDulces = estadoAgente.getCantidadActualDulces() + movimientoSiguiente.getCantidadDulcesEnCamino();
 
