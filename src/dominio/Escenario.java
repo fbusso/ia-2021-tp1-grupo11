@@ -251,19 +251,6 @@ public class Escenario {
         this.posicionInicialCaperucita = posicionInicialCaperucita;
     }
 
-    public boolean equals(Escenario otroEscenario) {
-
-        for (int i = 0; i < this.matriz.length; i++) {
-            for (int j = 0; j < matriz[0].length; j++) {
-                if (this.matriz[i][j] != otroEscenario.matriz[i][j]) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
-
     @Override
     public String toString() {
         StringBuilder matrizStringBuilder = new StringBuilder("MATRIZ: \n");
