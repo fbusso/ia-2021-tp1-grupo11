@@ -15,9 +15,7 @@ public abstract class AccionMovimiento extends SearchAction implements Actualiza
 
     @Override
     public SearchBasedAgentState obtenerEstadoActualizado(Movimiento movimientoSiguiente, EstadoCaperucita estadoAgente) {
-        if (!movimientoSiguiente.getLoboEnCamino()
-                && !estadoAgente.getPosicion().equals(movimientoSiguiente.getPosicionFinal())
-                && estadoAgente.posicionVisitadaVeces(movimientoSiguiente.getPosicionFinal(), 11)) {
+        if (!movimientoSiguiente.getLoboEnCamino()) {
 
             costo = Posicion.distanciaEntre(movimientoSiguiente.getPosicionFinal(), estadoAgente.getPosicion());
 //            estadoAgente.actualizarPosicionesVisitadas(estadoAgente.getPosicion());
@@ -44,11 +42,7 @@ public abstract class AccionMovimiento extends SearchAction implements Actualiza
 
     @Override
     public EnvironmentState obtenerEstadoAcualizado(Movimiento movimientoSiguiente, EstadoAmbiente estadoAmbiente, EstadoCaperucita estadoAgente) {
-        if (!movimientoSiguiente.getLoboEnCamino()
-                && !estadoAgente.getPosicion().equals(movimientoSiguiente.getPosicionFinal())
-                && estadoAgente.posicionVisitadaVeces(movimientoSiguiente.getPosicionFinal(), 11)) {
-
-            estadoAgente.actualizarPosicionesVisitadas(estadoAgente.getPosicion());
+        if (!movimientoSiguiente.getLoboEnCamino()) {
 
             // Cálculo del nuevo escenario.
             Escenario nuevoEscenario = Escenario.obtenerEscenarioActualizado(

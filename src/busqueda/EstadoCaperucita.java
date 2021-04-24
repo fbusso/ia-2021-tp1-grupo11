@@ -14,8 +14,6 @@ public class EstadoCaperucita extends SearchBasedAgentState implements Cloneable
     private Integer cantidadTotalDulces;
     private Escenario escenario;
     private Posicion posicion;
-    private Map<Posicion, Integer> posicionesVisitadas;
-    private Posicion ultimaPosicionVisitada;
     private Integer vidas;
 
     public EstadoCaperucita() {
@@ -66,23 +64,6 @@ public class EstadoCaperucita extends SearchBasedAgentState implements Cloneable
         this.escenario = escenario;
     }
 
-    public Posicion getUltimaPosicionVisitada() {
-        return ultimaPosicionVisitada;
-    }
-
-    public void setUltimaPosicionVisitada(Posicion ultimaPosicionVisitada) {
-        this.ultimaPosicionVisitada = ultimaPosicionVisitada;
-    }
-
-
-    public Map<Posicion, Integer> getPosicionesVisitadas() {
-        return posicionesVisitadas;
-    }
-
-    public void setPosicionesVisitadas(Map<Posicion, Integer> posicionesVisitadas) {
-        this.posicionesVisitadas = posicionesVisitadas;
-    }
-
     @Override
     public SearchBasedAgentState clone() {
         EstadoCaperucita nuevoEstado = new EstadoCaperucita();
@@ -91,21 +72,7 @@ public class EstadoCaperucita extends SearchBasedAgentState implements Cloneable
         nuevoEstado.setCantidadActualDulces(this.cantidadActualDulces);
         nuevoEstado.setCantidadTotalDulces(this.cantidadTotalDulces);
         nuevoEstado.setPosicion(this.posicion.clone());
-        nuevoEstado.setPosicionesVisitadas(this.posicionesVisitadas);
         return nuevoEstado;
-    }
-
-    public boolean posicionVisitadaVeces(Posicion posicion, Integer cantidadMaximaVisitas) {
-        return !this.posicionesVisitadas.containsKey(posicion) || this.posicionesVisitadas.get(posicion) <= cantidadMaximaVisitas;
-    }
-
-    public void actualizarPosicionesVisitadas(Posicion posicion) {
-        if (this.posicionesVisitadas.containsKey(posicion)) {
-            Integer cantidadVisitas = this.posicionesVisitadas.get(posicion);
-            this.posicionesVisitadas.replace(posicion, cantidadVisitas + 1);
-        } else {
-            this.posicionesVisitadas.put(posicion, 1);
-        }
     }
 
     @Override
@@ -114,9 +81,6 @@ public class EstadoCaperucita extends SearchBasedAgentState implements Cloneable
         this.cantidadActualDulces = 0;
         this.posicion = escenario.getPosicionActualCaperucita();
         this.cantidadTotalDulces = escenario.getCantidadDulces();
-        this.ultimaPosicionVisitada = null;
-        this.posicionesVisitadas = new HashMap<>();
-        this.posicionesVisitadas.put(escenario.getPosicionActualCaperucita(), 1);
     }
 
     @Override

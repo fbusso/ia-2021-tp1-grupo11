@@ -39,7 +39,6 @@ public abstract class AccionPerderVida extends SearchAction implements Actualiza
     public EnvironmentState obtenerEstadoAcualizado(Movimiento movimientoSiguiente, EstadoAmbiente estadoAmbiente, EstadoCaperucita estadoAgente) {
         if (movimientoSiguiente.getLoboEnCamino()) {
 
-            estadoAgente.actualizarPosicionesVisitadas(estadoAgente.getPosicion());
             // Cálculo del nuevo escenario.
             Escenario nuevoEscenario = Escenario.obtenerEscenarioReiniciado(estadoAgente.getEscenario(), true);
 
