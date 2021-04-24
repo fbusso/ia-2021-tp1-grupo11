@@ -40,7 +40,7 @@ public class Escenario {
      * @param nuevaPosicionCaperucita posición final de caperucita en el escenario nuevo
      * @return escenario copiado
      */
-    private static Escenario copiar(Escenario escenario, Posicion nuevaPosicionCaperucita, Boolean moverLobo) {
+    private static Escenario copiar(Escenario escenario, Posicion nuevaPosicionCaperucita) {
         Escenario nuevoEscenario = new Escenario();
 
         // Pasaje de atributos básicos.
@@ -59,25 +59,6 @@ public class Escenario {
         // Se actualiza la celda correspondiente a la nueva posición de Caperucita.
         nuevoEscenario.matriz[nuevaPosicionCaperucita.i][nuevaPosicionCaperucita.j] = 'C';
 
-        // Se reemplaza la posición actual del lobo por una celda vacía.
-        nuevoEscenario.matriz[nuevoEscenario.posicionActualLobo.i][nuevoEscenario.posicionActualLobo.j] = ' ';
-
-        // Se agrega la posición previa del lobo como una nueva posición posible.
-        nuevoEscenario.posicionesPosiblesLobo.add(new Posicion(escenario.posicionActualLobo.i, escenario.posicionActualLobo.j));
-
-        // Se elige la primer posición posible de la lista de posiciones mezclada.
-        if (!nuevoEscenario.posicionesPosiblesLobo.isEmpty() && moverLobo) {
-
-            // No se admite que el lobo se posiciones sobre Caperucita.
-            Posicion nuevaPosicionLobo = nuevoEscenario.posicionesPosiblesLobo.remove(0);
-            while (nuevaPosicionLobo.equals(nuevaPosicionCaperucita)) {
-                nuevaPosicionLobo = nuevoEscenario.posicionesPosiblesLobo.remove(0);
-            }
-
-            nuevoEscenario.matriz[nuevaPosicionLobo.i][nuevaPosicionLobo.j] = 'L';
-            nuevoEscenario.posicionActualLobo = nuevaPosicionLobo;
-        }
-
         return nuevoEscenario;
     }
 
@@ -88,14 +69,21 @@ public class Escenario {
      * @param nuevaPosicionCaperucita posicion de Caperucita luego de realizar el movimiento.
      * @param posicionesDulces        posiciones de los dulces recolectados en el movimiento.
      */
-    public static Escenario obtenerEscenarioActualizado(Escenario escenario, Posicion nuevaPosicionCaperucita, List<Posicion> posicionesDulces, Boolean moverLobo) {
+    public static Escenario obtenerEscenarioActualizado(Escenario escenario,
+                                                        Posicion nuevaPosicionCaperucita,
+                                                        List<Posicion> posicionesDulces,
+                                                        Boolean esEtapaBusqueda) {
         // Obtiene el escenario base a copiar.
-        Escenario nuevoEscenario = Escenario.copiar(escenario, nuevaPosicionCaperucita, moverLobo);
+        Escenario nuevoEscenario = Escenario.copiar(escenario, nuevaPosicionCaperucita);
 
         // Elimina los dulces recolectados en el nuevo escenario.
         for (Posicion posicion : posicionesDulces) {
             char celda = nuevoEscenario.matriz[posicion.i][posicion.j];
             if (celda == 'D') nuevoEscenario.matriz[posicion.i][posicion.j] = ' ';
+        }
+
+        if (!esEtapaBusqueda) {
+            nuevoEscenario.moverLobo();
         }
 
         return nuevoEscenario;
@@ -107,13 +95,17 @@ public class Escenario {
      * @param escenario escenario original desde el que se parte para obtener el escenario nuevo.
      * @return escenario reiniciado (Caperucita en la posición inicial y dulces restaurados).
      */
-    public static Escenario obtenerEscenarioReiniciado(Escenario escenario, Boolean moverLobo) {
+    public static Escenario obtenerEscenarioReiniciado(Escenario escenario, Boolean esEtapaBusqueda) {
         // Obtiene el escenario base a copiar.
-        Escenario nuevoEscenario = Escenario.copiar(escenario, escenario.posicionInicialCaperucita, moverLobo);
+        Escenario nuevoEscenario = Escenario.copiar(escenario, escenario.posicionInicialCaperucita);
 
         // Restaura los dulces en el nuevo escenario.
         for (Posicion posicion : nuevoEscenario.posicionesDulces) {
-            nuevoEscenario.matriz[posicion.i][posicion.j] = 'D';
+            nuevoEscenario.insertar('D', posicion);
+        }
+
+        if (esEtapaBusqueda) {
+            nuevoEscenario.insertar(' ', escenario.posicionActualLobo);
         }
 
         return nuevoEscenario;
@@ -167,6 +159,37 @@ public class Escenario {
         nuevoEscenario.posicionActualLobo = escenario.posicionActualLobo.clone();
 
         return nuevoEscenario;
+    }
+
+    private void moverLobo() {
+        // Se elige la primer posición posible de la lista de posiciones mezclada.
+        if (!this.posicionesPosiblesLobo.isEmpty()) {
+
+            // Se reemplaza la posición actual del lobo por una celda vacía.
+            insertar(' ', posicionActualLobo);
+
+            // Se agrega la posición previa del lobo como una nueva posición posible.
+            this.posicionesPosiblesLobo.add(this.posicionActualLobo.clone());
+
+            // No se admite que el lobo se posiciones sobre Caperucita.
+            Posicion nuevaPosicionLobo = this.posicionesPosiblesLobo.remove(0);
+            while (nuevaPosicionLobo.equals(this.posicionActualCaperucita)) {
+                nuevaPosicionLobo = this.posicionesPosiblesLobo.remove(0);
+            }
+
+            insertar('L', nuevaPosicionLobo);
+            this.posicionActualLobo = nuevaPosicionLobo;
+        }
+    }
+
+    /**
+     * Inserta un elemento en el escenario
+     *
+     * @param elemento elemento a insertar.
+     * @param posicion posición del escenario en la que se inserta el elemento.
+     */
+    private void insertar(char elemento, Posicion posicion) {
+        matriz[posicion.i][posicion.j] = elemento;
     }
 
     /**

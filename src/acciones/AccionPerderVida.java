@@ -21,7 +21,7 @@ public abstract class AccionPerderVida extends SearchAction implements Actualiza
             costo = Posicion.distanciaEntre(movimientoSiguiente.getPosicionFinal(), estadoAgente.getPosicion());
 
             // Cálculo del nuevo escenario.
-            Escenario nuevoEscenario = Escenario.obtenerEscenarioReiniciado(estadoAgente.getEscenario(), false);
+            Escenario nuevoEscenario = Escenario.obtenerEscenarioReiniciado(estadoAgente.getEscenario(), true);
 
             // Actualización del estado del agente.
             estadoAgente.setEscenario(nuevoEscenario);
@@ -40,7 +40,7 @@ public abstract class AccionPerderVida extends SearchAction implements Actualiza
         if (movimientoSiguiente.getLoboEnCamino()) {
 
             // Cálculo del nuevo escenario.
-            Escenario nuevoEscenario = Escenario.obtenerEscenarioReiniciado(estadoAgente.getEscenario(), true);
+            Escenario nuevoEscenario = Escenario.obtenerEscenarioReiniciado(estadoAgente.getEscenario(), false);
 
             // Actualización del estado del agente.
             estadoAgente.setEscenario(nuevoEscenario);
