@@ -18,11 +18,8 @@ public class Posicion {
                 : (double) Math.abs(unaPosicion.i - otraPosicion.i);
     }
 
-    @Override
-    public boolean equals(Object otraPosicion) {
-        return (otraPosicion instanceof Posicion)
-                && this.i.equals(((Posicion) otraPosicion).j)
-                && this.j.equals(((Posicion) otraPosicion).j);
+    public Boolean equals(Posicion otraPosicion) {
+        return (this.i.equals(otraPosicion.i) && this.j.equals(otraPosicion.j));
     }
 
     public Posicion clone() {
