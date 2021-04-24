@@ -5,6 +5,9 @@ import dominio.Posicion;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class EstadoCaperucita extends SearchBasedAgentState implements Cloneable {
 
     private Integer cantidadActualDulces;
