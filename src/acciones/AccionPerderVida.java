@@ -48,7 +48,6 @@ public abstract class AccionPerderVida extends SearchAction implements Actualiza
     public SearchBasedAgentState obtenerEstadoActualizado(Movimiento movimientoSiguiente, EstadoCaperucita estadoAgente) {
         if (movimientoSiguiente.getLoboEnCamino()) {
 
-//            estadoAgente.actualizarPosicionesVisitadas(estadoAgente.getPosicion());
             costo = Posicion.distanciaEntre(movimientoSiguiente.getPosicionFinal(), estadoAgente.getPosicion());
 
             // Cálculo del nuevo escenario.
