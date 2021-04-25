@@ -12,10 +12,15 @@ public class Posicion {
         this.j = j;
     }
 
+    /**
+     * Calcula la distancia entre dos puntos A y B del escenario (No necesariamente alineados).
+     *
+     * @param unaPosicion  punto A.
+     * @param otraPosicion punto B.
+     * @return distancia entre ambos puntos.
+     */
     public static Double distanciaEntre(Posicion unaPosicion, Posicion otraPosicion) {
-        return unaPosicion.i.equals(otraPosicion.i)
-                ? (double) Math.abs(unaPosicion.j - otraPosicion.j)
-                : (double) Math.abs(unaPosicion.i - otraPosicion.i);
+        return Math.sqrt(Math.pow(otraPosicion.i - unaPosicion.i, 2) + Math.pow(otraPosicion.j - unaPosicion.j, 2));
     }
 
     public Boolean equals(Posicion otraPosicion) {
@@ -26,8 +31,4 @@ public class Posicion {
         return new Posicion(this.i, this.j);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(i, j);
-    }
 }
