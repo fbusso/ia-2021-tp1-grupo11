@@ -20,6 +20,10 @@ public abstract class AccionPerderVida extends SearchAction implements Actualiza
     protected Avanzar avanzar;
     private Double costo;
 
+    /**
+     * Actualiza un nodo del árbol de búsqueda mientras se ejecuta el algoritmo.
+     * No actualiza el estado del mundo real.
+     */
     @Override
     public SearchBasedAgentState execute(SearchBasedAgentState s) {
         EstadoCaperucita estado = (EstadoCaperucita) s;
