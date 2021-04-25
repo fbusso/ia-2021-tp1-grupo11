@@ -92,7 +92,7 @@ public abstract class AccionPerderVida extends SearchAction {
      * Se calcula como la distancia entre el punto origen y la posición inicial de caperucita, multiplicado por un
      * coeficiente de penalización (10).
      *
-     * @return costo de realizar la acción
+     * @return costo de realizar la acción.
      */
     @Override
     public Double getCost() {

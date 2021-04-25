@@ -99,7 +99,7 @@ public abstract class AccionMovimiento extends SearchAction {
      * Representa el costo de realizar un movimiento sin perder una vida.
      * Se calcula como la distancia entre el punto origen y el punto destino.
      *
-     * @return costo de realizar la acción
+     * @return costo de realizar la acción.
      */
     @Override
     public Double getCost() {
