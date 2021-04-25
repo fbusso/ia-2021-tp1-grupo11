@@ -13,7 +13,7 @@ import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 
-public abstract class AccionMovimiento extends SearchAction implements ActualizarEstado {
+public abstract class AccionMovimiento extends SearchAction {
 
     protected Retroceder retroceder;
     protected EvaluarPosicion evaluarPosicion;
@@ -27,29 +27,10 @@ public abstract class AccionMovimiento extends SearchAction implements Actualiza
     @Override
     public SearchBasedAgentState execute(SearchBasedAgentState s) {
         EstadoCaperucita estadoAgente = (EstadoCaperucita) s;
-
         char[][] matriz = estadoAgente.getEscenario().getMatriz();
         Posicion posicionActual = estadoAgente.getPosicion();
         Movimiento movimientoSiguiente = new Movimiento(posicionActual, matriz, avanzar, retroceder, evaluarPosicion);
-        return obtenerEstadoActualizado(movimientoSiguiente, estadoAgente);
-    }
 
-    /**
-     * Actualiza el estado del agente y del mundo real.
-     */
-    @Override
-    public EnvironmentState execute(AgentState agentState, EnvironmentState environmentState) {
-        EstadoAmbiente estadoAmbiente = (EstadoAmbiente) environmentState;
-        EstadoCaperucita estadoAgente = (EstadoCaperucita) agentState;
-
-        char[][] matriz = estadoAgente.getEscenario().getMatriz();
-        Posicion posicionActual = estadoAgente.getPosicion();
-        Movimiento movimientoSiguiente = new Movimiento(posicionActual, matriz, avanzar, retroceder, evaluarPosicion);
-        return obtenerEstadoAcualizado(movimientoSiguiente, estadoAmbiente, estadoAgente);
-    }
-
-    @Override
-    public SearchBasedAgentState obtenerEstadoActualizado(Movimiento movimientoSiguiente, EstadoCaperucita estadoAgente) {
         if (!movimientoSiguiente.getLoboEnCamino()) {
 
             costo = Posicion.distanciaEntre(movimientoSiguiente.getPosicionFinal(), estadoAgente.getPosicion());
@@ -74,8 +55,18 @@ public abstract class AccionMovimiento extends SearchAction implements Actualiza
         return null;
     }
 
+    /**
+     * Actualiza el estado del agente y del mundo real.
+     */
     @Override
-    public EnvironmentState obtenerEstadoAcualizado(Movimiento movimientoSiguiente, EstadoAmbiente estadoAmbiente, EstadoCaperucita estadoAgente) {
+    public EnvironmentState execute(AgentState agentState, EnvironmentState environmentState) {
+        EstadoAmbiente estadoAmbiente = (EstadoAmbiente) environmentState;
+        EstadoCaperucita estadoAgente = (EstadoCaperucita) agentState;
+
+        char[][] matriz = estadoAgente.getEscenario().getMatriz();
+        Posicion posicionActual = estadoAgente.getPosicion();
+        Movimiento movimientoSiguiente = new Movimiento(posicionActual, matriz, avanzar, retroceder, evaluarPosicion);
+
         if (!movimientoSiguiente.getLoboEnCamino()) {
 
             // Cálculo del nuevo escenario.
@@ -104,6 +95,12 @@ public abstract class AccionMovimiento extends SearchAction implements Actualiza
         return null;
     }
 
+    /**
+     * Representa el costo de realizar un movimiento sin perder una vida.
+     * Se calcula como la distancia entre el punto origen y el punto destino.
+     *
+     * @return costo de realizar la acción
+     */
     @Override
     public Double getCost() {
         return costo;

@@ -1,7 +1,5 @@
 package dominio;
 
-import java.util.Objects;
-
 public class Posicion {
 
     public Integer i;
