@@ -34,7 +34,7 @@ public abstract class AccionPerderVida extends SearchAction {
 
         if (movimientoSiguiente.getLoboEnCamino()) {
 
-            costo = Posicion.distanciaEntre(movimientoSiguiente.getPosicionFinal(),
+            costo = Posicion.distanciaEntre(estadoAgente.getPosicion(),
                     estadoAgente.getEscenario().getPosicionInicialCaperucita());
 
             // Cálculo del nuevo escenario.
