@@ -7,8 +7,8 @@ package acciones;
 public class IrAbajo extends AccionMovimiento {
 
     public IrAbajo() {
-        avanzar = (posicion -> posicion.i++);
-        retroceder = (posicion -> posicion.i--);
+        avanzar = posicion -> posicion.i++;
+        retroceder = posicion -> posicion.i--;
         evaluarPosicion = (posicion, matriz) -> posicion.i < matriz.length && matriz[posicion.i][posicion.j] != 'A';
     }
 

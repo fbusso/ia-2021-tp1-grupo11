@@ -7,9 +7,9 @@ package acciones;
 public class IrArriba extends AccionMovimiento {
 
     public IrArriba() {
-        this.avanzar = (posicion -> posicion.i--);
-        this.retroceder = (posicion -> posicion.i++);
-        this.evaluarPosicion = (posicion, matriz) -> posicion.i >= 0 && matriz[posicion.i][posicion.j] != 'A';
+        avanzar = posicion -> posicion.i--;
+        retroceder = posicion -> posicion.i++;
+        evaluarPosicion = (posicion, matriz) -> posicion.i >= 0 && matriz[posicion.i][posicion.j] != 'A';
     }
 
     /**

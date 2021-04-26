@@ -7,9 +7,9 @@ package acciones;
 public class IrAbajoPerderVida extends AccionPerderVida {
 
     public IrAbajoPerderVida() {
-        this.avanzar = (posicion -> posicion.i++);
-        this.retroceder = (posicion -> posicion.i--);
-        this.evaluarPosicion = (posicion, matriz) -> posicion.i < matriz.length && matriz[posicion.i][posicion.j] != 'A';
+        avanzar = posicion -> posicion.i++;
+        retroceder = posicion -> posicion.i--;
+        evaluarPosicion = (posicion, matriz) -> posicion.i < matriz.length && matriz[posicion.i][posicion.j] != 'A';
     }
 
     /**

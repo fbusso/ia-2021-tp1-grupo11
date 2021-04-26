@@ -7,9 +7,9 @@ package acciones;
 public class IrDerecha extends AccionMovimiento {
 
     public IrDerecha() {
-        this.avanzar = (posicion -> posicion.j++);
-        this.retroceder = (posicion -> posicion.j--);
-        this.evaluarPosicion = (posicion, matriz) -> posicion.j <= matriz[0].length && matriz[posicion.i][posicion.j] != 'A';
+        avanzar = posicion -> posicion.j++;
+        retroceder = posicion -> posicion.j--;
+        evaluarPosicion = (posicion, matriz) -> posicion.j <= matriz[0].length && matriz[posicion.i][posicion.j] != 'A';
     }
 
     /**
