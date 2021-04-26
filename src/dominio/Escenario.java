@@ -92,14 +92,6 @@ public class Escenario {
     /**
      * Retorna un escenario modificado, producido cuando Caperucita pierde una vida.
      *
-     * @param escenario escenario original desde el que se parte para obtener el escenario nuevo.
-     * @return escenario reiniciado (Caperucita en la posición inicial y dulces restaurados).
-     */
-
-
-    /**
-     * Retorna un escenario modificado, producido cuando Caperucita pierde una vida.
-     *
      * @param escenario       escenario original desde el que se parte para obtener el escenario nuevo.
      * @param esEtapaBusqueda si se ejecuta durante la búsqueda o la actualización real del agente.
      * @return escenario reiniciado (Caperucita en la posición inicial y dulces restaurados).
@@ -117,6 +109,8 @@ public class Escenario {
         // Se elimina al lobo de su posición actual.
         if (esEtapaBusqueda) {
             nuevoEscenario.limpiar(escenario.posicionActualLobo);
+        } else {
+            nuevoEscenario.moverLobo();
         }
 
         return nuevoEscenario;

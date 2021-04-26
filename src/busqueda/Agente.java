@@ -8,7 +8,9 @@ import frsf.cidisi.faia.agent.search.Problem;
 import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgent;
 import frsf.cidisi.faia.solver.search.AStarSearch;
+import frsf.cidisi.faia.solver.search.BreathFirstSearch;
 import frsf.cidisi.faia.solver.search.Search;
+import frsf.cidisi.faia.solver.search.UniformCostSearch;
 
 import java.util.Vector;
 import java.util.logging.Level;
@@ -44,8 +46,8 @@ public class Agente extends SearchBasedAgent {
     @Override
     public Action selectAction() {
 
-        // Búsqueda en Primero en Amplitud (Breathe First Search).
-        // BreathFirstSearch estrategia = new BreathFirstSearch();
+        //Búsqueda en Primero en Amplitud (Breathe First Search).
+        BreathFirstSearch estrategia = new BreathFirstSearch();
 
         // Estrategia de costo uniforme.
         // UniformCostSearch estrategia = new UniformCostSearch(new FuncionCosto());
@@ -53,7 +55,8 @@ public class Agente extends SearchBasedAgent {
         // Búsqueda en Primero en Profundidad (Depth First Search).
         // DepthFirstSearch estrategia = new DepthFirstSearch();
 
-        AStarSearch estrategia = new AStarSearch(new FuncionCosto(), new FuncionHeuristica());
+        // Estrategia A Estrella.
+        // AStarSearch estrategia = new AStarSearch(new FuncionCosto(), new FuncionHeuristica());
 
         Search busqueda = new Search(estrategia);
         busqueda.setVisibleTree(Search.PDF_TREE);
