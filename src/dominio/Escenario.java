@@ -53,6 +53,11 @@ public class Escenario {
         nuevoEscenario.posicionesCampoFlores = new ArrayList<>(escenario.posicionesCampoFlores);
         nuevoEscenario.posicionesDulces = escenario.posicionesDulces;
 
+        // Se insertan nuevamente los campos de flores por si Caperucita se posicionó en uno previamente
+        for(Posicion posicion: escenario.posicionesCampoFlores) {
+            nuevoEscenario.insertar('F', posicion);
+        }
+
         // Se reemplaza la posición actual de Caperucita por una celda vacía.
         nuevoEscenario.limpiar(escenario.posicionActualCaperucita);
         // Se actualiza la posición actual de Caperucita.
