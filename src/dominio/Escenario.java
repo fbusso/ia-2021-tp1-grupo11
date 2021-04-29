@@ -11,8 +11,8 @@ public class Escenario {
     private char[][] matriz;
     private Posicion posicionActualCaperucita;
     private Posicion posicionActualLobo;
-    private Posicion posicionCampoFlores;
     private Posicion posicionInicialCaperucita;
+    private List<Posicion> posicionesCampoFlores;
     private List<Posicion> posicionesDulces;
     private List<Posicion> posicionesPosiblesLobo;
 
@@ -23,6 +23,7 @@ public class Escenario {
     public Escenario(char[][] matriz) {
         this.matriz = matriz;
         posicionesDulces = new ArrayList<>();
+        posicionesCampoFlores = new ArrayList<>();
         posicionesPosiblesLobo = new ArrayList<>();
         calculosAuxiliares();
     }
@@ -47,9 +48,9 @@ public class Escenario {
         nuevoEscenario.matriz = Escenario.copiarMatriz(escenario.matriz);
         nuevoEscenario.cantidadDulces = escenario.cantidadDulces;
         nuevoEscenario.posicionInicialCaperucita = escenario.posicionInicialCaperucita;
-        nuevoEscenario.posicionCampoFlores = escenario.posicionCampoFlores;
         nuevoEscenario.posicionActualLobo = escenario.posicionActualLobo;
         nuevoEscenario.posicionesPosiblesLobo = new ArrayList<>(escenario.posicionesPosiblesLobo);
+        nuevoEscenario.posicionesCampoFlores = new ArrayList<>(escenario.posicionesCampoFlores);
         nuevoEscenario.posicionesDulces = escenario.posicionesDulces;
 
         // Se reemplaza la posición actual de Caperucita por una celda vacía.
@@ -117,7 +118,7 @@ public class Escenario {
     }
 
     public static Boolean esCampoDeFlores(Escenario escenario, Posicion posicion) {
-        return posicion.equals(escenario.posicionCampoFlores);
+        return escenario.posicionesCampoFlores.stream().anyMatch(posicion::equals);
     }
 
     /**
@@ -158,9 +159,9 @@ public class Escenario {
         nuevoEscenario.posicionesPosiblesLobo = new ArrayList<>(escenario.posicionesPosiblesLobo);
         nuevoEscenario.posicionInicialCaperucita = escenario.posicionInicialCaperucita;
         nuevoEscenario.posicionesDulces = new ArrayList<>(escenario.posicionesDulces);
+        nuevoEscenario.posicionesCampoFlores = new ArrayList<>(escenario.posicionesCampoFlores);
         nuevoEscenario.posicionActualCaperucita = escenario.posicionActualCaperucita;
         nuevoEscenario.cantidadDulces = escenario.cantidadDulces;
-        nuevoEscenario.posicionCampoFlores = escenario.posicionCampoFlores.clone();
         nuevoEscenario.posicionActualLobo = escenario.posicionActualLobo.clone();
 
         return nuevoEscenario;
@@ -226,7 +227,7 @@ public class Escenario {
                     cantidadDulces++;
                     posicionesDulces.add(new Posicion(i, j));
                 } else if (matriz[i][j] == 'F') {
-                    posicionCampoFlores = new Posicion(i, j);
+                    posicionesCampoFlores.add(new Posicion(i, j));
                 } else if (Escenario.esPosicionPosibleLobo(matriz, i, j)) {
                     posicionesPosiblesLobo.add(new Posicion(i, j));
                 }
