@@ -6,7 +6,9 @@ import java.util.Arrays;
 
 
 public class AuxiliarEscenario {
-    private static final String ESCENARIO_EJEMPLO = "resources\\escenario_ejemplo.txt";
+    private static final String ESCENARIO_EJEMPLO_1 = "resources\\escenario_ejemplo_1.txt";
+    private static final String ESCENARIO_EJEMPLO_2 = "resources\\escenario_ejemplo_2.txt";
+    private static final String ESCENARIO_EJEMPLO_3 = "resources\\escenario_ejemplo_3.txt";
     private static final String ESCENARIO_MOVER_ABAJO_EXITO = "resources\\escenario_mover_abajo_exito.txt";
     private static final String ESCENARIO_PRUEBAS_EN_PROFUNIDAD = "resources\\escenario_pruebas_en_profundidad.txt";
     private static final String ESCENARIO_MOVER_ABAJO_Y_ARRIBA = "resources\\escenario_mover_abajo_y_arriba.txt";
@@ -19,7 +21,7 @@ public class AuxiliarEscenario {
 
     public static char[][] obtenerMatriz() {
         try {
-            BufferedReader csvReader = new BufferedReader(new FileReader(ESCENARIO_EJEMPLO));
+            BufferedReader csvReader = new BufferedReader(new FileReader(ESCENARIO_EJEMPLO_3));
             int i = 0, j = 0;
             char[][] matriz = new char[9][14];
 
