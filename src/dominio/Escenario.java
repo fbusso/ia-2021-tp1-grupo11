@@ -72,7 +72,7 @@ public class Escenario {
      * Retorna un escenario modificado, producido por un movimiento de caperucita.
      *
      * @param escenario               escenario actual a obtener modificado.
-     * @param nuevaPosicionCaperucita posicion de Caperucita luego de realizar el movimiento.
+     * @param nuevaPosicionCaperucita posición de Caperucita luego de realizar el movimiento.
      * @param posicionesDulces        posiciones de los dulces recolectados en el movimiento.
      */
     public static Escenario obtenerEscenarioActualizado(Escenario escenario,
