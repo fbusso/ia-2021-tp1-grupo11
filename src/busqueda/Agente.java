@@ -47,7 +47,7 @@ public class Agente extends SearchBasedAgent {
     public Action selectAction() {
 
         //Búsqueda en Primero en Amplitud (Breathe First Search).
-        BreathFirstSearch estrategia = new BreathFirstSearch();
+        // BreathFirstSearch estrategia = new BreathFirstSearch();
 
         // Estrategia de costo uniforme.
         // UniformCostSearch estrategia = new UniformCostSearch(new FuncionCosto());
@@ -56,7 +56,7 @@ public class Agente extends SearchBasedAgent {
         // DepthFirstSearch estrategia = new DepthFirstSearch();
 
         // Estrategia A Estrella.
-        // AStarSearch estrategia = new AStarSearch(new FuncionCosto(), new FuncionHeuristica());
+        AStarSearch estrategia = new AStarSearch(new FuncionCosto(), new FuncionHeuristica());
 
         Search busqueda = new Search(estrategia);
         busqueda.setVisibleTree(Search.PDF_TREE);

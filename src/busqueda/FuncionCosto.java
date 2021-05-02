@@ -6,6 +6,6 @@ import frsf.cidisi.faia.solver.search.NTree;
 public class FuncionCosto implements IStepCostFunction {
     @Override
     public double calculateCost(NTree nodo) {
-        return 10 * nodo.getAction().getCost();
+        return nodo.getAction().getCost();
     }
 }

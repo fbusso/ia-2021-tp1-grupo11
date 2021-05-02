@@ -33,7 +33,7 @@ public abstract class AccionMovimiento extends SearchAction {
 
         if (!movimientoSiguiente.getLoboEnCamino() && !movimientoSiguiente.getPosicionFinal().equals(estadoAgente.getPosicion())) {
 
-            costo = Posicion.distanciaEntre(movimientoSiguiente.getPosicionFinal(), estadoAgente.getPosicion());
+            costo = (double) (estadoAgente.getEscenario().getCantidadDulces() - estadoAgente.getCantidadActualDulces());
 
             // Cálculo del nuevo escenario.
             Escenario nuevoEscenario = Escenario.obtenerEscenarioActualizado(

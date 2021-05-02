@@ -10,8 +10,7 @@ public class ObjetivoAgente extends GoalTest {
     public boolean isGoalState(AgentState agentState) {
         EstadoCaperucita estado = (EstadoCaperucita) agentState;
         return estado.getVidas() > 0 &&
-                Escenario.esCampoDeFlores(estado.getEscenario(), estado.getPosicion()) &&
-                estado.getCantidadActualDulces().equals(estado.getCantidadTotalDulces());
+                Escenario.esCampoDeFlores(estado.getEscenario(), estado.getPosicion());
     }
 
 }
