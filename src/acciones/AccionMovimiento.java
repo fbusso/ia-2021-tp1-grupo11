@@ -31,7 +31,7 @@ public abstract class AccionMovimiento extends SearchAction {
         Posicion posicionActual = estadoAgente.getPosicion();
         Movimiento movimientoSiguiente = new Movimiento(posicionActual, matriz, avanzar, retroceder, evaluarPosicion);
 
-        if (!movimientoSiguiente.getLoboEnCamino()) {
+        if (!movimientoSiguiente.getLoboEnCamino() && !movimientoSiguiente.getPosicionFinal().equals(estadoAgente.getPosicion())) {
 
             costo = Posicion.distanciaEntre(movimientoSiguiente.getPosicionFinal(), estadoAgente.getPosicion());
 
@@ -67,7 +67,7 @@ public abstract class AccionMovimiento extends SearchAction {
         Posicion posicionActual = estadoAgente.getPosicion();
         Movimiento movimientoSiguiente = new Movimiento(posicionActual, matriz, avanzar, retroceder, evaluarPosicion);
 
-        if (!movimientoSiguiente.getLoboEnCamino()) {
+        if (!movimientoSiguiente.getLoboEnCamino() && !movimientoSiguiente.getPosicionFinal().equals(estadoAgente.getPosicion())) {
 
             // Cálculo del nuevo escenario.
             Escenario nuevoEscenario = Escenario.obtenerEscenarioActualizado(

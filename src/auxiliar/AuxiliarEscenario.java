@@ -21,7 +21,7 @@ public class AuxiliarEscenario {
 
     public static char[][] obtenerMatriz() {
         try {
-            BufferedReader csvReader = new BufferedReader(new FileReader(ESCENARIO_EJEMPLO_3));
+            BufferedReader csvReader = new BufferedReader(new FileReader(ESCENARIO_EJEMPLO_1));
             int i = 0, j = 0;
             char[][] matriz = new char[9][14];
 
